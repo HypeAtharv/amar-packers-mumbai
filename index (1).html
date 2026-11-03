@@ -2378,29 +2378,61 @@
         margin-top: 2rem;
         padding-top: 1.5rem;
         border-top: 1px solid var(--border-color);
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 0.85rem 1.25rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.65rem;
+        width: 100%;
       }
 
       .badge-tag-item {
-        display: inline-flex;
+        display: flex;
         align-items: center;
-        gap: 8px;
-        font-size: 0.8rem;
+        justify-content: flex-start;
+        gap: 10px;
+        font-size: 0.85rem;
         font-weight: 700;
         color: var(--navy-dark);
-        background: #f1f5f9;
-        padding: 6px 14px;
-        border-radius: var(--radius-full);
+        background: #f8fafc;
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius-md);
         border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .badge-tag-item i {
         color: var(--primary-red);
-        font-size: 0.95rem;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+
+      @media (min-width: 576px) {
+        .badges-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .badge-tag-item:last-child {
+          grid-column: 1 / -1;
+        }
+      }
+
+      @media (min-width: 992px) {
+        .badges-strip {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          gap: 0.85rem 1.25rem;
+        }
+        .badge-tag-item {
+          display: inline-flex;
+          width: auto;
+          border-radius: var(--radius-full);
+          padding: 8px 18px;
+        }
+        .badge-tag-item:last-child {
+          grid-column: auto;
+        }
       }
 
       /* Our Promise Section (Page 5, 4.1) */
@@ -2646,6 +2678,217 @@
         transform: translateY(-2px);
       }
 
+      /* ========================================================
+         MOBILE TYPOGRAPHY & READABILITY ENHANCEMENTS (<= 768px)
+         Optimized for comfortable reading on all mobile screens
+         ======================================================== */
+      @media (max-width: 768px) {
+        body {
+          font-size: 16px;
+          line-height: 1.6;
+        }
+
+        /* Hero & Value Proposition */
+        .hero-h1 {
+          font-size: 1.95rem;
+          line-height: 1.25;
+        }
+        .hero-description {
+          font-size: 1.05rem;
+          line-height: 1.6;
+        }
+        .hero-feat-item {
+          font-size: 0.95rem;
+        }
+        .social-proof-text {
+          font-size: 0.925rem;
+          line-height: 1.45;
+        }
+
+        /* Estimate Calculator Form */
+        .estimate-title {
+          font-size: 1.35rem;
+        }
+        .estimate-subtitle {
+          font-size: 0.9rem;
+        }
+        .form-label {
+          font-size: 0.9rem;
+        }
+        .form-input {
+          font-size: 0.95rem;
+        }
+        .inv-btn {
+          font-size: 0.875rem;
+          padding: 8px 10px;
+        }
+        .price-info-col {
+          font-size: 0.85rem;
+        }
+        .estimate-price-number {
+          font-size: 1.35rem;
+        }
+        .price-guarantee-col {
+          font-size: 0.85rem;
+        }
+        .sub-guarantee {
+          font-size: 0.775rem;
+        }
+        .field-error-msg {
+          font-size: 0.825rem;
+        }
+        .form-guarantee-note {
+          font-size: 0.85rem;
+        }
+        .btn-submit-estimate {
+          font-size: 1.05rem;
+        }
+
+        /* Stat Band */
+        .stat-num {
+          font-size: 1.75rem;
+        }
+        .stat-label {
+          font-size: 0.875rem;
+        }
+
+        /* Badges Strip */
+        .badge-tag-item {
+          font-size: 0.925rem;
+          padding: 0.8rem 1rem;
+        }
+        .badge-tag-item i {
+          font-size: 1.15rem;
+        }
+
+        /* Institutional Trust Strip */
+        .trust-item-title {
+          font-size: 1.05rem;
+        }
+        .trust-item-desc {
+          font-size: 0.925rem;
+          line-height: 1.55;
+        }
+
+        /* Services Cards */
+        .service-body h3 {
+          font-size: 1.2rem;
+        }
+        .service-body p {
+          font-size: 0.95rem;
+          line-height: 1.6;
+        }
+        .service-perk {
+          font-size: 0.825rem;
+        }
+        .service-price-val {
+          font-size: 1.25rem;
+        }
+        .btn-service-book {
+          font-size: 0.9rem;
+        }
+        .service-tag-badge {
+          font-size: 0.775rem;
+        }
+
+        /* 4-Layer Packaging Shield */
+        .shield-card h4 {
+          font-size: 1.15rem;
+        }
+        .shield-card p {
+          font-size: 0.925rem;
+          line-height: 1.55;
+        }
+        .shield-items-protected {
+          font-size: 0.85rem;
+        }
+        .shield-layer-tag {
+          font-size: 0.775rem;
+        }
+
+        /* Moving Rates Matrix */
+        .rate-house-type {
+          font-size: 1.3rem;
+        }
+        .rate-fit {
+          font-size: 0.9rem;
+        }
+        .rate-price-label {
+          font-size: 0.825rem;
+        }
+        .rate-price-val {
+          font-size: 1.6rem;
+        }
+        .rate-feature-list li {
+          font-size: 0.925rem;
+          line-height: 1.5;
+        }
+        .btn-rate-book {
+          font-size: 0.95rem;
+        }
+        .popular-tag {
+          font-size: 0.775rem;
+        }
+
+        /* How It Works (Steps) */
+        .step-card h3 {
+          font-size: 1.15rem;
+        }
+        .step-card p {
+          font-size: 0.925rem;
+          line-height: 1.55;
+        }
+        .step-badge {
+          font-size: 0.85rem;
+        }
+
+        /* Customer Reviews */
+        .review-card p {
+          font-size: 0.95rem;
+          line-height: 1.6;
+        }
+        .reviewer-meta h4 {
+          font-size: 1.05rem;
+        }
+        .reviewer-meta span {
+          font-size: 0.85rem;
+        }
+        .verified-pill {
+          font-size: 0.8rem;
+        }
+
+        /* FAQ Accordion */
+        .faq-question {
+          font-size: 1.05rem;
+        }
+        .faq-answer {
+          font-size: 0.95rem;
+          line-height: 1.65;
+        }
+
+        /* Inter-City Corridors */
+        .corridor-route {
+          font-size: 1rem;
+        }
+        .corridor-price {
+          font-size: 1.1rem;
+        }
+        .btn-corridor-book {
+          font-size: 0.85rem;
+        }
+
+        /* Locations Cloud */
+        .location-tag {
+          font-size: 0.875rem;
+          padding: 7px 14px;
+        }
+
+        /* Bottom Sticky Bar */
+        .mobile-bottom-bar a {
+          font-size: 0.95rem;
+        }
+      }
+
     </style>
   </head>
   <body>
@@ -2718,7 +2961,7 @@
               <div class="avatar"><img src="images/avatar-1.jpg" alt="Atharva T. - Verified Customer" loading="eager" width="38" height="38" /></div>
               <div class="avatar"><img src="images/avatar-2.jpg" alt="Akash D. - Verified Customer" loading="eager" width="38" height="38" /></div>
               <div class="avatar"><img src="images/avatar-3.jpg" alt="Shubhangi M. - Verified Customer" loading="eager" width="38" height="38" /></div>
-              <div class="avatar"><img src="images/avatar-4.jpg" alt="Sneha S. - Verified Customer" loading="eager" width="38" height="38" /></div>
+              <div class="avatar"><img src="images/avatar-5.jpg" alt="Sneha S. - Verified Customer" loading="eager" width="38" height="38" /></div>
             </div>
             <div class="social-proof-text">
               <strong>15,000+ Happy Families Relocated</strong> across Mumbai, Thane, Navi Mumbai, and All-India corridors.
@@ -2890,7 +3133,7 @@
             <div class="stat-label">On-Time Delivery Rate</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">4.9<span>★</span></div>
+            <div class="stat-num">4.9<span>&#9733;</span></div>
             <div class="stat-label">Google Rating (91+ Reviews)</div>
           </div>
         </div>
@@ -3112,7 +3355,7 @@
           <!-- Review 5 -->
           <div class="review-card">
             <div class="review-header">
-              <div class="reviewer-avatar"><img src="images/avatar-2.jpg" alt="Pooja Mehta" loading="lazy" width="44" height="44" /></div>
+              <div class="reviewer-avatar"><img src="images/avatar-5.jpg" alt="Pooja Mehta" loading="lazy" width="44" height="44" /></div>
               <div class="reviewer-meta">
                 <h4>Pooja Mehta</h4>
                 <span>Kandivali to Worli • Jan 2025</span>
@@ -3130,7 +3373,7 @@
           <!-- Review 6 -->
           <div class="review-card">
             <div class="review-header">
-              <div class="reviewer-avatar"><img src="images/avatar-1.jpg" alt="Vikram Shinde" loading="lazy" width="44" height="44" /></div>
+              <div class="reviewer-avatar"><img src="images/avatar-6.jpg" alt="Vikram Shinde" loading="lazy" width="44" height="44" /></div>
               <div class="reviewer-meta">
                 <h4>Vikram Shinde</h4>
                 <span>SBI Corporate Staff, BKC • Oct 2024</span>
