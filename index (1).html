@@ -2319,13 +2319,26 @@
         margin-bottom: 2rem;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        gap: 1.25rem 1rem;
         text-align: center;
       }
 
-      @media (min-width: 768px) {
+      .stat-band .stat-item:last-child:nth-child(odd) {
+        grid-column: span 2;
+      }
+
+      @media (min-width: 640px) {
         .stat-band {
-          grid-template-columns: repeat(5, 1fr);
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .stat-band .stat-item:last-child:nth-child(odd) {
+          grid-column: span 1;
+        }
+      }
+
+      @media (min-width: 992px) {
+        .stat-band {
+          grid-template-columns: repeat(6, 1fr);
           gap: 1.5rem;
         }
       }
@@ -2875,6 +2888,10 @@
           <div class="stat-item">
             <div class="stat-num">99.2<span>%</span></div>
             <div class="stat-label">On-Time Delivery Rate</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">4.9<span>★</span></div>
+            <div class="stat-label">Google Rating (91+ Reviews)</div>
           </div>
         </div>
 
