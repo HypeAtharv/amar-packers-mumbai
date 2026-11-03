@@ -1,0 +1,5 @@
+.agents/
+images_orig/
+tests/
+*.pdf
+*.log
