@@ -353,8 +353,7 @@ function hype_crm_inject_frontend_script() {
                 if (toInput) waMsg += "• *To:* " + encodeURIComponent(toInput) + "%0A";
                 if (dateInput) waMsg += "• *Move Date:* " + encodeURIComponent(dateInput) + "%0A";
                 waMsg += "• *Requirement:* Free Doorstep Survey & Custom Quote%0A%0A";
-                waMsg += "Please confirm survey coordinator slot.
-";
+                waMsg += "Please confirm survey coordinator slot.";
                 const waUrl = "https://wa.me/918286864002?text=" + waMsg;
                 const ajaxUrl = '<?php echo esc_url(admin_url('admin-ajax.php')); ?>';
 
