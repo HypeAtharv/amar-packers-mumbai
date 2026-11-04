@@ -288,56 +288,155 @@ add_action('wp_footer', 'hype_crm_inject_frontend_script', 999);
 function hype_crm_inject_frontend_script() {
     ?>
     <style id="hype-footer-polish">
-    /* Deep rich background for modern look */
+    /* ============================================================
+       AMAR PACKERS - 100% RESPONSIVE CLEAN FOOTER (DESKTOP & MOBILE)
+       ============================================================ */
+
+    /* Base Footer */
     #site_footer {
-        position: relative;
-        background: #0f172a !important;
+        position: relative !important;
+        background: #0b1329 !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        color: #94a3b8 !important;
+        overflow: hidden !important;
     }
-    #site_footer, #site_footer p, #site_footer div, #site_footer span {
-        color: #94a3b8;
-    }
+
     #site_footer h4 {
         color: #ffffff !important;
         font-size: 18px !important;
         font-weight: 700 !important;
-        margin-bottom: 20px !important;
+        letter-spacing: -0.01em !important;
+        margin-bottom: 18px !important;
     }
+
+    #site_footer, 
+    #site_footer p, 
+    #site_footer div, 
+    #site_footer span {
+        color: #94a3b8;
+    }
+
     #site_footer a {
-        color: #cbd5e1 !important;
-        text-decoration: none;
-        transition: color 0.2s;
+        color: #e2e8f0 !important;
+        text-decoration: none !important;
+        transition: color 0.2s ease !important;
     }
+
     #site_footer a:hover {
         color: #ee1d23 !important;
     }
-    /* Bottom bar styling */
-    .footer_2 {
-        background: #090d16 !important;
-        border-top: 1px solid #1e293b !important;
-        padding: 16px 0 !important;
+
+    /* Middle Footer Widget Columns */
+    .cz_middle_footer {
+        padding-top: 45px !important;
+        padding-bottom: 35px !important;
     }
-    /* Desktop: Inset bottom bar text so corner floating widgets NEVER overlap */
+
+    /* Social icons */
+    .cz_middle_footer .cz_social_icons a {
+        border-color: rgba(255, 255, 255, 0.15) !important;
+        color: #cbd5e1 !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .cz_middle_footer .cz_social_icons a:hover {
+        background: #ee1d23 !important;
+        border-color: #ee1d23 !important;
+        color: #ffffff !important;
+    }
+
+    /* Bottom Bar (.footer_2) */
+    .footer_2 {
+        background: #070d1e !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-bottom: none !important;
+        padding: 16px 20px !important;
+        box-sizing: border-box !important;
+    }
+
+    .footer_2 .row,
+    .footer_2 .row.elms_row {
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Desktop View */
     @media (min-width: 769px) {
         .footer_2 .elms_left,
         .footer_2 .footer_2_left {
-            padding-left: 200px !important;
+            padding-left: 180px !important;
             float: left !important;
         }
         .footer_2 .elms_right,
         .footer_2 .footer_2_right {
-            padding-right: 95px !important;
+            padding-right: 90px !important;
             float: right !important;
         }
     }
-    /* Mobile: Clearance for sticky bottom bar & no overlap */
+
+    /* Mobile View - 100% Seamless, Responsive & Centered */
     @media (max-width: 768px) {
-        #site_footer {
-            padding-bottom: 120px !important;
-            padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)) !important;
-        }
+        html body,
+        body.home,
         body {
-            padding-bottom: 110px !important;
+            padding-bottom: 0 !important;
+            margin-bottom: 0 !important;
         }
+        
+        #site_footer {
+            border-bottom: none !important;
+            padding-bottom: 75px !important;
+            padding-bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+        }
+        
+        .cz_middle_footer .col.s6,
+        .cz_middle_footer .sidebar_footer-1,
+        .cz_middle_footer .sidebar_footer-2 {
+            width: 100% !important;
+            float: none !important;
+            display: block !important;
+            text-align: center !important;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+            margin-bottom: 28px !important;
+            box-sizing: border-box !important;
+        }
+        
+        .cz_middle_footer h4 {
+            text-align: center !important;
+        }
+        
+        .cz_middle_footer .tal {
+            text-align: center !important;
+        }
+        
+        .cz_middle_footer .codevz-widget-about-content {
+            text-align: center !important;
+            font-size: 13.5px !important;
+            line-height: 1.6 !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            max-width: 330px !important;
+        }
+        
+        .cz_middle_footer .cz_social_icons,
+        .cz_middle_footer .cz_social {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 10px !important;
+            margin: 15px auto 0 auto !important;
+            width: 100% !important;
+        }
+        
+        .footer_2 {
+            padding: 16px 15px !important;
+        }
+        
         .footer_2 .row.elms_row,
         .footer_2 .clr {
             display: flex !important;
@@ -346,43 +445,67 @@ function hype_crm_inject_frontend_script() {
             justify-content: center !important;
             text-align: center !important;
             width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
+        
         .footer_2 .elms_left,
         .footer_2 .footer_2_left,
         .footer_2 .elms_right,
         .footer_2 .footer_2_right {
+            display: block !important;
             float: none !important;
             width: 100% !important;
             text-align: center !important;
-            padding-left: 15px !important;
-            padding-right: 15px !important;
+            padding: 0 !important;
             margin: 4px 0 !important;
+            left: 0 !important;
+            right: 0 !important;
         }
+        
         .footer_2 .cz_elm {
-            margin-top: 4px !important;
-            margin-bottom: 4px !important;
+            margin: 3px 0 !important;
+            display: block !important;
+            width: 100% !important;
+            text-align: center !important;
         }
-        /* Hide duplicate theme nav */
+        
+        .footer_2 .elm_icon_text {
+            display: block !important;
+            width: 100% !important;
+            text-align: center !important;
+        }
+        
+        .footer_2 .it_text {
+            display: block !important;
+            width: 100% !important;
+            text-align: center !important;
+            font-size: 12.5px !important;
+            line-height: 1.5 !important;
+            color: #94a3b8 !important;
+        }
+        
         .xtra-fixed-mobile-nav,
         .cz_fixed_mobile_nav,
-        .cz_fixed_bottom_border {
+        .cz_fixed_bottom_border,
+        .cz_fixed_top_border {
             display: none !important;
             visibility: hidden !important;
             pointer-events: none !important;
         }
-        /* Hide duplicate floating round WhatsApp button because bottom bar already has WhatsApp */
+        
         .joinchat,
         div[class*="joinchat"],
         .cz_whatsapp_fixed {
             display: none !important;
             visibility: hidden !important;
         }
-        /* Position back-to-top button above sticky bar on mobile */
-        .cz_back_to_top,
-        #cz_back_to_top,
-        .back_to_top {
-            bottom: 85px !important;
-            right: 15px !important;
+        
+        .backtotop,
+        i.backtotop,
+        .cz_back_to_top {
+            display: none !important;
+            visibility: hidden !important;
         }
     }
     </style>
