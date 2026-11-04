@@ -379,7 +379,7 @@ function hype_crm_inject_frontend_script() {
         }
     }
 
-    /* Mobile View - 100% Seamless, Responsive & Centered */
+    /* Mobile View - Ultra-Compact, Zero Dead Space & Guaranteed Sticky Bar Clearance */
     @media (max-width: 768px) {
         html body,
         body.home,
@@ -388,10 +388,26 @@ function hype_crm_inject_frontend_script() {
             margin-bottom: 0 !important;
         }
         
+        /* Eliminate dead space on page sections */
+        .elementor-section,
+        .elementor-top-section,
+        .e-con {
+            margin-top: 14px !important;
+            margin-bottom: 14px !important;
+            padding-top: 14px !important;
+            padding-bottom: 14px !important;
+        }
+
         #site_footer {
             border-bottom: none !important;
-            padding-bottom: 75px !important;
-            padding-bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+            padding: 0 !important;
+            margin-bottom: 0 !important;
+            overflow: visible !important;
+        }
+        
+        .cz_middle_footer {
+            padding-top: 20px !important;
+            padding-bottom: 12px !important;
         }
         
         .cz_middle_footer .col.s6,
@@ -401,27 +417,39 @@ function hype_crm_inject_frontend_script() {
             float: none !important;
             display: block !important;
             text-align: center !important;
-            padding-left: 20px !important;
-            padding-right: 20px !important;
-            margin-bottom: 28px !important;
+            padding-left: 14px !important;
+            padding-right: 14px !important;
+            margin-bottom: 16px !important;
             box-sizing: border-box !important;
         }
         
+        #site_footer h4,
         .cz_middle_footer h4 {
+            font-size: 16px !important;
+            font-weight: 800 !important;
+            color: #ffffff !important;
             text-align: center !important;
+            margin-top: 0 !important;
+            margin-bottom: 6px !important;
+            padding-bottom: 0 !important;
+            border-bottom: none !important;
         }
         
         .cz_middle_footer .tal {
             text-align: center !important;
         }
         
-        .cz_middle_footer .codevz-widget-about-content {
+        .cz_middle_footer .codevz-widget-about-content,
+        .cz_middle_footer .mb30,
+        .mb30 {
             text-align: center !important;
-            font-size: 13.5px !important;
-            line-height: 1.6 !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+            margin-top: 0 !important;
+            margin-bottom: 8px !important;
             margin-left: auto !important;
             margin-right: auto !important;
-            max-width: 330px !important;
+            max-width: 340px !important;
         }
         
         .cz_middle_footer .cz_social_icons,
@@ -429,13 +457,27 @@ function hype_crm_inject_frontend_script() {
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
-            gap: 10px !important;
-            margin: 15px auto 0 auto !important;
+            gap: 8px !important;
+            margin: 6px auto 0 auto !important;
             width: 100% !important;
         }
+
+        .cz_middle_footer .cz_social_icons a {
+            width: 36px !important;
+            height: 36px !important;
+            line-height: 36px !important;
+            font-size: 14px !important;
+        }
         
+        /* Compact Bottom Bar with 95px Bottom Padding to Clear Sticky Bar Completely */
         .footer_2 {
-            padding: 16px 15px !important;
+            background: #070d1e !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+            padding-top: 12px !important;
+            padding-left: 14px !important;
+            padding-right: 14px !important;
+            padding-bottom: calc(95px + env(safe-area-inset-bottom, 0px)) !important;
+            box-sizing: border-box !important;
         }
         
         .footer_2 .row.elms_row,
@@ -459,13 +501,13 @@ function hype_crm_inject_frontend_script() {
             width: 100% !important;
             text-align: center !important;
             padding: 0 !important;
-            margin: 4px 0 !important;
+            margin: 2px 0 !important;
             left: 0 !important;
             right: 0 !important;
         }
         
         .footer_2 .cz_elm {
-            margin: 3px 0 !important;
+            margin: 2px 0 !important;
             display: block !important;
             width: 100% !important;
             text-align: center !important;
@@ -481,9 +523,10 @@ function hype_crm_inject_frontend_script() {
             display: block !important;
             width: 100% !important;
             text-align: center !important;
-            font-size: 12.5px !important;
-            line-height: 1.5 !important;
+            font-size: 12px !important;
+            line-height: 1.45 !important;
             color: #94a3b8 !important;
+            margin: 2px 0 !important;
         }
         
         .xtra-fixed-mobile-nav,
