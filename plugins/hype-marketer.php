@@ -256,17 +256,8 @@ function hype_crm_inject_frontend_script() {
             heroForm.removeAttribute('onsubmit');
             heroForm.onsubmit = null;
 
-            // Size selection state
+            // Size selection state (No pricing logic)
             const sizeButtons = heroForm.querySelectorAll('.amar-size-btn');
-            const prices = {
-                '1 RK': '₹4,500 – ₹6,500',
-                '1 BHK': '₹6,500 – ₹9,500',
-                '2 BHK': '₹9,500 – ₹15,500',
-                '3 BHK': '₹15,000 – ₹24,000',
-                'Vehicle': '₹3,500 – ₹8,000',
-                'Office': 'Custom Corporate Quote'
-            };
-
             sizeButtons.forEach(function(btn) {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -280,12 +271,6 @@ function hype_crm_inject_frontend_script() {
                     this.style.background = '#fff0f0';
                     this.style.borderColor = '#ee1d23';
                     this.style.color = '#ee1d23';
-
-                    const sz = this.getAttribute('data-size') || this.textContent.trim();
-                    const estEl = document.getElementById('amarEstimatePrice');
-                    if (estEl && prices[sz]) {
-                        estEl.textContent = prices[sz];
-                    }
                 });
             });
 
@@ -338,15 +323,13 @@ function hype_crm_inject_frontend_script() {
 
                 const activeBtn = heroForm.querySelector('.amar-size-btn.active');
                 const selectedSize = activeBtn ? (activeBtn.getAttribute('data-size') || activeBtn.textContent.trim()) : '1 BHK';
-
-                const estEl = document.getElementById('amarEstimatePrice') || heroForm.querySelector('.amar-calc-price');
-                const estimatedPrice = estEl ? estEl.textContent.trim() : (prices[selectedSize] || '₹6,500 – ₹9,500');
+                const estimatedPrice = 'Free Survey & Custom Quote';
 
                 isSubmitting = true;
 
                 if (submitBtn) {
                     submitBtn.disabled = true;
-                    submitBtn.innerHTML = '<span><i class="fas fa-spinner fa-spin"></i> Saving Booking...</span>';
+                    submitBtn.innerHTML = '<span><i class="fas fa-spinner fa-spin"></i> Booking Survey...</span>';
                 }
 
                 const formData = new FormData();
@@ -361,12 +344,12 @@ function hype_crm_inject_frontend_script() {
 
                 let waMsg = "Hello Amar Packers! I would like to book a free doorstep survey for moving in Mumbai.%0A%0A";
                 waMsg += "*Move Details:*%0A";
-                waMsg += "• *Size:* " + encodeURIComponent(selectedSize) + "%0A";
+                waMsg += "• *Move Size:* " + encodeURIComponent(selectedSize) + "%0A";
                 if (fromInput) waMsg += "• *From:* " + encodeURIComponent(fromInput) + "%0A";
                 if (toInput) waMsg += "• *To:* " + encodeURIComponent(toInput) + "%0A";
-                if (dateInput) waMsg += "• *Date:* " + encodeURIComponent(dateInput) + "%0A";
+                if (dateInput) waMsg += "• *Move Date:* " + encodeURIComponent(dateInput) + "%0A";
                 waMsg += "• *Mobile:* " + encodeURIComponent(phoneInput) + "%0A";
-                waMsg += "• *Estimated Range:* " + encodeURIComponent(estimatedPrice) + "%0A%0A";
+                waMsg += "• *Requirement:* Free Doorstep Survey & Custom Quote%0A%0A";
                 waMsg += "Please confirm survey coordinator slot.";
 
                 const waUrl = "https://wa.me/918286864002?text=" + waMsg;
