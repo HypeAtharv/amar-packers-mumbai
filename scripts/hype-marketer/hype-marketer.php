@@ -98,13 +98,25 @@ add_action('admin_head', 'hype_crm_admin_menu_custom_icon');
 function hype_crm_admin_menu_custom_icon() {
     ?>
     <style>
-    #adminmenu #toplevel_page_hype-marketer .wp-menu-image {
+    #adminmenu #toplevel_page_hype-marketer .wp-menu-image,
+    #adminmenu .toplevel_page_hype-marketer .wp-menu-image {
         background-image: url('data:image/png;base64,<?php echo HYPE_MARKETER_LOGO_B64; ?>') !important;
         background-repeat: no-repeat !important;
-        background-position: center 8px !important;
-        background-size: 18px auto !important;
+        background-position: center center !important;
+        background-size: 20px auto !important;
+        opacity: 0.9;
     }
-    #adminmenu #toplevel_page_hype-marketer .wp-menu-image:before {
+    #adminmenu #toplevel_page_hype-marketer:hover .wp-menu-image,
+    #adminmenu #toplevel_page_hype-marketer.current .wp-menu-image,
+    #adminmenu #toplevel_page_hype-marketer.wp-has-current-submenu .wp-menu-image,
+    #adminmenu .toplevel_page_hype-marketer:hover .wp-menu-image,
+    #adminmenu .toplevel_page_hype-marketer.current .wp-menu-image {
+        opacity: 1;
+    }
+    #adminmenu #toplevel_page_hype-marketer .wp-menu-image:before,
+    #adminmenu #toplevel_page_hype-marketer .wp-menu-image img,
+    #adminmenu .toplevel_page_hype-marketer .wp-menu-image:before,
+    #adminmenu .toplevel_page_hype-marketer .wp-menu-image img {
         display: none !important;
     }
     </style>
@@ -130,13 +142,15 @@ function hype_crm_register_admin_menu() {
 
     $badge = $new_count > 0 ? sprintf(' <span class="update-plugins count-%d" style="background:#0f172a;color:#fff;border-radius:10px;padding:2px 7px;font-size:10px;font-weight:700;"><span class="plugin-count">%d</span></span>', $new_count, $new_count) : '';
 
+    $svg_icon = 'data:image/svg+xml;base64,' . base64_encode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 161 112" width="20" height="20"><image href="data:image/png;base64,' . HYPE_MARKETER_LOGO_B64 . '" width="161" height="112"/></svg>');
+
     add_menu_page(
         'Hype Marketer Leads',
         'Hype Marketer' . $badge,
         'manage_options',
         'hype-marketer',
         'hype_crm_render_spreadsheet',
-        'dashicons-spreadsheet',
+        $svg_icon,
         3
     );
 }
