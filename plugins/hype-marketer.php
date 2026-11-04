@@ -578,6 +578,74 @@ function hype_crm_inject_frontend_script() {
             display: none !important;
             visibility: hidden !important;
         }
+
+        /* 1. Remove top red phone text in mobile header */
+        .cz_before_mobile_header,
+        .elementor-1808,
+        .elementor-element-b10483c {
+            display: none !important;
+        }
+
+        /* 2. Hide redundant duplicate CTA buttons in mobile hero */
+        .amar-hero-cta,
+        .elementor-element-b6c507a2 {
+            display: none !important;
+        }
+
+        /* 3. Hero layout & spacing */
+        .elementor-907 > .elementor-section:first-child,
+        .elementor-907 > .e-con:first-child {
+            padding-top: 15px !important;
+            padding-bottom: 25px !important;
+        }
+
+        /* 4. Crisp mobile H1 */
+        .elementor-element-d1ce6107 h1,
+        .elementor-element-d1ce6107 .elementor-heading-title {
+            font-size: 22px !important;
+            line-height: 1.25 !important;
+            margin-top: 8px !important;
+            margin-bottom: 8px !important;
+            letter-spacing: -0.02em !important;
+        }
+
+        /* 5. Mobile Subtitle / Paragraph: concise & clean */
+        .elementor-element-466c4bf1 p,
+        .elementor-element-466c4bf1 {
+            font-size: 13px !important;
+            line-height: 1.4 !important;
+            color: #94a3b8 !important;
+            margin-bottom: 12px !important;
+        }
+
+        /* 6. Clean 2-column compact trust checkmarks */
+        .elementor-element-e0eecf60 .elementor-icon-list-items {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 6px 10px !important;
+            margin-bottom: 14px !important;
+            padding: 0 !important;
+        }
+        .elementor-element-e0eecf60 .elementor-icon-list-item {
+            font-size: 11.5px !important;
+            line-height: 1.25 !important;
+            display: flex !important;
+            align-items: flex-start !important;
+            gap: 5px !important;
+        }
+        .elementor-element-e0eecf60 .elementor-icon-list-icon {
+            font-size: 12px !important;
+        }
+
+        /* 7. Ratings badge full width cleanly below avatars */
+        .elementor-element-a5fa305f > .elementor-widget-container > div {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 8px !important;
+            margin-bottom: 18px !important;
+        }
+
     }
     
         /* ============================================================
@@ -658,6 +726,16 @@ function hype_crm_inject_frontend_script() {
             transform: translateY(-2px) !important;
             box-shadow: 0 6px 16px rgba(238, 29, 35, 0.4) !important;
         }
+
+        .amar-service-link {
+            cursor: pointer !important;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        .amar-service-link:hover {
+            color: #c2030a !important;
+            transform: translateX(4px) !important;
+        }
+
 
         /* Interactive Quote Modal Dialog */
         .amar-quote-modal-overlay {
@@ -1275,6 +1353,41 @@ function hype_crm_inject_frontend_script() {
                 });
             });
         });
+
+        // 3. Service cards buttons (.amar-service-link or text containing 'Book Move')
+        document.querySelectorAll('.amar-service-link, a, button').forEach(function(btn) {
+            const txt = (btn.innerText || '').trim();
+            if (btn.classList.contains('amar-service-link') || txt.includes('Book Move')) {
+                if (btn.hasAttribute('data-amar-wired')) return;
+                btn.setAttribute('data-amar-wired', '1');
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const card = btn.closest('.amar-service-card') || btn.closest('[class*="card"]') || btn.parentElement;
+                    let detectedSize = '1 BHK';
+                    let detectedSource = 'Services';
+                    if (card) {
+                        const titleEl = card.querySelector('h3, h4, .amar-service-title, [class*="title"]');
+                        const title = titleEl ? titleEl.innerText.trim() : (card.innerText || '');
+                        detectedSource = title ? 'Service: ' + title : 'Services';
+                        if (title.includes('Car') || title.includes('Bike') || title.includes('Vehicle')) {
+                            detectedSize = 'Vehicle';
+                        } else if (title.includes('Office') || title.includes('Corporate')) {
+                            detectedSize = 'Office';
+                        } else if (title.includes('Warehouse') || title.includes('Storage')) {
+                            detectedSize = '1 BHK';
+                        } else if (title.includes('Single') || title.includes('Luggage')) {
+                            detectedSize = '1 RK';
+                        } else if (title.includes('Household')) {
+                            detectedSize = '2 BHK';
+                        }
+                    }
+                    window.amarOpenQuoteModal({ size: detectedSize, source: detectedSource });
+                });
+            }
+        });
+
     }
 
         
