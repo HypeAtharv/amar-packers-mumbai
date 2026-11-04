@@ -509,7 +509,235 @@ function hype_crm_inject_frontend_script() {
             visibility: hidden !important;
         }
     }
+    
+        /* ============================================================
+           AMAR PACKERS - BUTTON HOVER FIX & INTERACTIVE QUOTE MODAL
+           ============================================================ */
+
+        /* Button Hover Fix - Guaranteed White Text & Smooth Transition */
+        .amar-rate-btn,
+        .amar-rate-btn:visited,
+        .amar-rate-btn:focus,
+        .amar-rate-btn:hover,
+        .amar-rate-btn:active,
+        .amar-rate-card.featured .amar-rate-btn,
+        .amar-rate-card.featured .amar-rate-btn:visited,
+        .amar-rate-card.featured .amar-rate-btn:focus,
+        .amar-rate-card.featured .amar-rate-btn:hover,
+        .amar-rate-card.featured .amar-rate-btn:active,
+        .amar-corridor-btn,
+        .amar-corridor-btn:visited,
+        .amar-corridor-btn:focus,
+        .amar-corridor-btn:hover,
+        .amar-corridor-btn:active {
+            color: #ffffff !important;
+            text-decoration: none !important;
+        }
+
+        .amar-rate-btn {
+            display: block !important;
+            width: 100% !important;
+            text-align: center !important;
+            padding: 11px 16px !important;
+            border-radius: 8px !important;
+            font-weight: 700 !important;
+            font-size: 13.5px !important;
+            background: #0b192c !important;
+            color: #ffffff !important;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            box-sizing: border-box !important;
+            cursor: pointer !important;
+        }
+
+        .amar-rate-btn:hover {
+            background: #1e293b !important;
+            color: #ffffff !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 20px rgba(11, 25, 44, 0.25) !important;
+        }
+
+        .amar-rate-card.featured .amar-rate-btn {
+            background: linear-gradient(135deg, #ee1d23, #c2030a) !important;
+            box-shadow: 0 6px 15px rgba(238, 29, 35, 0.35) !important;
+            color: #ffffff !important;
+        }
+
+        .amar-rate-card.featured .amar-rate-btn:hover {
+            background: linear-gradient(135deg, #ff2a30, #d60810) !important;
+            color: #ffffff !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 22px rgba(238, 29, 35, 0.5) !important;
+        }
+
+        .amar-corridor-btn {
+            display: block !important;
+            text-align: center !important;
+            background: #0b192c !important;
+            color: #ffffff !important;
+            padding: 8px 12px !important;
+            border-radius: 6px !important;
+            font-size: 12.5px !important;
+            font-weight: 700 !important;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            cursor: pointer !important;
+        }
+
+        .amar-corridor-btn:hover {
+            background: #ee1d23 !important;
+            color: #ffffff !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 16px rgba(238, 29, 35, 0.4) !important;
+        }
+
+        /* Interactive Quote Modal Dialog */
+        .amar-quote-modal-overlay {
+            position: fixed !important;
+            inset: 0 !important;
+            z-index: 999999 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 16px !important;
+            box-sizing: border-box !important;
+        }
+
+        .amar-quote-modal-backdrop {
+            position: fixed !important;
+            inset: 0 !important;
+            background: rgba(11, 25, 44, 0.75) !important;
+            backdrop-filter: blur(4px) !important;
+            -webkit-backdrop-filter: blur(4px) !important;
+            z-index: 1 !important;
+        }
+
+        .amar-quote-modal-dialog {
+            position: relative !important;
+            z-index: 2 !important;
+            background: #ffffff !important;
+            border-radius: 20px !important;
+            width: 100% !important;
+            max-width: 460px !important;
+            max-height: 90vh !important;
+            overflow-y: auto !important;
+            padding: 24px 22px !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35) !important;
+            box-sizing: border-box !important;
+            animation: amarModalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+
+        @keyframes amarModalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .amar-quote-modal-close {
+            position: absolute !important;
+            top: 14px !important;
+            right: 14px !important;
+            width: 32px !important;
+            height: 32px !important;
+            border-radius: 50% !important;
+            background: #f1f5f9 !important;
+            border: none !important;
+            font-size: 20px !important;
+            line-height: 1 !important;
+            color: #64748b !important;
+            cursor: pointer !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            transition: 0.2s !important;
+            z-index: 5 !important;
+        }
+
+        .amar-quote-modal-close:hover {
+            background: #fee2e2 !important;
+            color: #ee1d23 !important;
+        }
+
     </style>
+    
+    <!-- Interactive Quote Modal for Pricing Cards & Corridors -->
+    <div id="amarQuoteModal" class="amar-quote-modal-overlay" style="display:none;">
+        <div class="amar-quote-modal-backdrop" onclick="amarCloseQuoteModal()"></div>
+        <div class="amar-quote-modal-dialog">
+            <button type="button" class="amar-quote-modal-close" onclick="amarCloseQuoteModal()" title="Close">&times;</button>
+            
+            <div class="amar-calc-card" style="border:none; box-shadow:none; padding:0; background:transparent;">
+                <div style="font-size: 11.5px; font-weight: 800; color: #ee1d23; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px;">✦ FREE SURVEY &amp; CUSTOM QUOTE</div>
+                <h3 style="margin: 0 0 4px 0; font-size: 21px; font-weight: 800; color: #0b192c;">Get Free Moving Quote</h3>
+                <p style="margin: 0 0 16px 0; font-size: 12.5px; color: #64748b;">Takes 30 seconds • 100% Free Doorstep Survey</p>
+                
+                <form id="amarModalEstimateForm">
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; font-size: 12px; font-weight: 700; color: #334155; margin-bottom: 6px;">Select Move Size:</label>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 6px;">
+                            <button type="button" class="amar-size-btn active" data-size="1 BHK" style="background: #fff0f0; border: 1.5px solid #ee1d23; color: #ee1d23; border-radius: 6px; padding: 7px 4px; font-size: 12.5px; font-weight: 700; cursor: pointer;">1 BHK</button>
+                            <button type="button" class="amar-size-btn" data-size="2 BHK" style="background: #f8fafc; border: 1.5px solid #e2e8f0; color: #475569; border-radius: 6px; padding: 7px 4px; font-size: 12.5px; font-weight: 700; cursor: pointer;">2 BHK</button>
+                            <button type="button" class="amar-size-btn" data-size="3 BHK" style="background: #f8fafc; border: 1.5px solid #e2e8f0; color: #475569; border-radius: 6px; padding: 7px 4px; font-size: 12.5px; font-weight: 700; cursor: pointer;">3 BHK</button>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
+                            <button type="button" class="amar-size-btn" data-size="1 RK" style="background: #f8fafc; border: 1.5px solid #e2e8f0; color: #475569; border-radius: 6px; padding: 7px 4px; font-size: 12.5px; font-weight: 700; cursor: pointer;">1 RK</button>
+                            <button type="button" class="amar-size-btn" data-size="Vehicle" style="background: #f8fafc; border: 1.5px solid #e2e8f0; color: #475569; border-radius: 6px; padding: 7px 4px; font-size: 12.5px; font-weight: 700; cursor: pointer;">Vehicle</button>
+                            <button type="button" class="amar-size-btn" data-size="Office" style="background: #f8fafc; border: 1.5px solid #e2e8f0; color: #475569; border-radius: 6px; padding: 7px 4px; font-size: 12.5px; font-weight: 700; cursor: pointer;">Office</button>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 10px;">
+                        <label style="display: block; font-size: 11.5px; font-weight: 600; color: #64748b; margin-bottom: 4px;">Your Name <span style="color:#ee1d23;">*</span></label>
+                        <input type="text" id="amarModalName" placeholder="e.g. Rahul Sharma" required style="width: 100%; padding: 8px 10px; border: 1.5px solid #cbd5e1; border-radius: 6px; font-size: 13px; box-sizing: border-box;">
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
+                        <div>
+                            <label style="display: block; font-size: 11.5px; font-weight: 600; color: #64748b; margin-bottom: 4px;">Moving From <span style="color:#ee1d23;">*</span></label>
+                            <input type="text" id="amarModalFrom" placeholder="e.g. Andheri East" required style="width: 100%; padding: 8px 10px; border: 1.5px solid #cbd5e1; border-radius: 6px; font-size: 13px; box-sizing: border-box;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 11.5px; font-weight: 600; color: #64748b; margin-bottom: 4px;">Moving To <span style="color:#ee1d23;">*</span></label>
+                            <input type="text" id="amarModalTo" placeholder="e.g. Powai" required style="width: 100%; padding: 8px 10px; border: 1.5px solid #cbd5e1; border-radius: 6px; font-size: 13px; box-sizing: border-box;">
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px;">
+                        <div>
+                            <label style="display: block; font-size: 11.5px; font-weight: 600; color: #64748b; margin-bottom: 4px;">Mobile Phone <span style="color:#ee1d23;">*</span></label>
+                            <input type="tel" id="amarModalPhone" placeholder="10-digit mobile" required pattern="[0-9]{10}" style="width: 100%; padding: 8px 10px; border: 1.5px solid #cbd5e1; border-radius: 6px; font-size: 13px; box-sizing: border-box;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 11.5px; font-weight: 600; color: #64748b; margin-bottom: 4px;">Move Date <span style="color:#ee1d23;">*</span></label>
+                            <input type="date" id="amarModalDate" required style="width: 100%; padding: 8px 10px; border: 1.5px solid #cbd5e1; border-radius: 6px; font-size: 13px; box-sizing: border-box;">
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 18px;">🛡️</span>
+                            <div>
+                                <div style="font-size: 12px; font-weight: 800; color: #166534;">100% Free Doorstep Survey</div>
+                                <div style="font-size: 11px; color: #15803d;">Guaranteed Best Rate • Zero Hidden Charges</div>
+                            </div>
+                        </div>
+                        <div style="background: #ffffff; border: 1px solid #86efac; border-radius: 6px; padding: 4px 8px; font-size: 11px; font-weight: 800; color: #166534; white-space: nowrap;">
+                            ⚡ 15-Min Callback
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="amarModalSubmitBtn" style="width: 100%; background: linear-gradient(135deg, #ee1d23, #c2030a); color: #fff; padding: 13px; border: none; border-radius: 8px; font-size: 15px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 8px 20px -4px rgba(238, 29, 35, 0.4);">
+                        <span>Get Free Quote on WhatsApp →</span>
+                    </button>
+                    <div style="text-align: center; margin-top: 8px; font-size: 11px; color: #94a3b8;">🔒 100% Privacy Protected. No spam calls.</div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
     (function() {
         function initHypeHeroCrm() {
@@ -718,11 +946,271 @@ function hype_crm_inject_frontend_script() {
             }
         }
 
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initHypeHeroCrm);
-        } else {
-            initHypeHeroCrm();
+        
+    // --- Interactive Quote Modal & Button Wiring ---
+    window.amarOpenQuoteModal = function(options) {
+        options = options || {};
+        const modal = document.getElementById('amarQuoteModal');
+        if (!modal) return;
+
+        const modalForm = document.getElementById('amarModalEstimateForm');
+        if (modalForm) {
+            modalForm.querySelectorAll('input').forEach(function(i) {
+                i.style.borderColor = '#cbd5e1';
+            });
         }
+
+        if (options.size) {
+            const sizeBtns = modal.querySelectorAll('.amar-size-btn');
+            sizeBtns.forEach(function(b) {
+                b.classList.remove('active');
+                b.style.background = '#f8fafc';
+                b.style.borderColor = '#e2e8f0';
+                b.style.color = '#475569';
+                if (b.getAttribute('data-size') === options.size || b.textContent.trim().includes(options.size)) {
+                    b.classList.add('active');
+                    b.style.background = '#fff0f0';
+                    b.style.borderColor = '#ee1d23';
+                    b.style.color = '#ee1d23';
+                }
+            });
+        }
+
+        const fromInp = document.getElementById('amarModalFrom');
+        const toInp = document.getElementById('amarModalTo');
+        if (fromInp && options.from) fromInp.value = options.from;
+        if (toInp && options.to) toInp.value = options.to;
+
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+
+        setTimeout(function() {
+            const nameInp = document.getElementById('amarModalName');
+            if (nameInp && !nameInp.value) nameInp.focus();
+        }, 120);
+    };
+
+    window.amarCloseQuoteModal = function() {
+        const modal = document.getElementById('amarQuoteModal');
+        if (modal) modal.style.display = 'none';
+        document.body.style.overflow = '';
+    };
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            window.amarCloseQuoteModal();
+        }
+    });
+
+    function initAmarModalForm() {
+        const modalForm = document.getElementById('amarModalEstimateForm');
+        if (!modalForm) return;
+
+        const sizeBtns = modalForm.querySelectorAll('.amar-size-btn');
+        sizeBtns.forEach(function(b) {
+            b.addEventListener('click', function(e) {
+                e.preventDefault();
+                sizeBtns.forEach(function(btn) {
+                    btn.classList.remove('active');
+                    btn.style.background = '#f8fafc';
+                    btn.style.borderColor = '#e2e8f0';
+                    btn.style.color = '#475569';
+                });
+                this.classList.add('active');
+                this.style.background = '#fff0f0';
+                this.style.borderColor = '#ee1d23';
+                this.style.color = '#ee1d23';
+            });
+        });
+
+        modalForm.querySelectorAll('input').forEach(function(inp) {
+            inp.addEventListener('input', function() {
+                this.style.borderColor = '#cbd5e1';
+            });
+        });
+
+        let isModalSubmitting = false;
+
+        modalForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (isModalSubmitting) return false;
+
+            function showModalError(inp, msg) {
+                if (inp) {
+                    inp.style.borderColor = '#ee1d23';
+                    inp.focus();
+                }
+                alert(msg);
+            }
+
+            const activeBtn = modalForm.querySelector('.amar-size-btn.active');
+            if (!activeBtn) {
+                alert('Please select your Move Size (e.g. 1 BHK, 2 BHK, etc.).');
+                return false;
+            }
+            const selectedSize = activeBtn.getAttribute('data-size') || activeBtn.textContent.trim();
+
+            const nameInp = document.getElementById('amarModalName');
+            const nameVal = nameInp ? nameInp.value.trim() : '';
+            if (!nameVal) {
+                showModalError(nameInp, 'Please enter your Full Name.');
+                return false;
+            }
+
+            const fromInp = document.getElementById('amarModalFrom');
+            const fromVal = fromInp ? fromInp.value.trim() : '';
+            if (!fromVal) {
+                showModalError(fromInp, 'Please enter your Moving From location.');
+                return false;
+            }
+
+            const toInp = document.getElementById('amarModalTo');
+            const toVal = toInp ? toInp.value.trim() : '';
+            if (!toVal) {
+                showModalError(toInp, 'Please enter your Moving To destination.');
+                return false;
+            }
+
+            const phoneInp = document.getElementById('amarModalPhone');
+            const rawPhone = phoneInp ? phoneInp.value.trim() : '';
+            const cleanPhone = rawPhone.replace(/\D/g, '');
+            if (!cleanPhone || cleanPhone.length < 10) {
+                showModalError(phoneInp, 'Please enter a valid 10-digit mobile number.');
+                return false;
+            }
+
+            const dateInp = document.getElementById('amarModalDate');
+            const dateVal = dateInp ? dateInp.value.trim() : '';
+            if (!dateVal) {
+                showModalError(dateInp, 'Please select your Move Date.');
+                return false;
+            }
+
+            isModalSubmitting = true;
+            const submitBtn = document.getElementById('amarModalSubmitBtn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span><i class="fas fa-spinner fa-spin"></i> Booking Survey...</span>';
+            }
+
+            const formData = new FormData();
+            formData.append('action', 'amar_save_hero_lead');
+            formData.append('name', nameVal);
+            formData.append('phone', cleanPhone);
+            formData.append('moving_from', fromVal);
+            formData.append('moving_to', toVal);
+            formData.append('move_size', selectedSize);
+            formData.append('move_date', dateVal);
+            formData.append('estimated_price', 'Free Survey & Custom Quote');
+
+            let waMsg = "Hello Amar Packers! I would like to book a free doorstep survey for moving in Mumbai.%0A%0A";
+            waMsg += "*Customer Details:*%0A";
+            waMsg += "• *Name:* " + encodeURIComponent(nameVal) + "%0A";
+            waMsg += "• *Mobile:* " + encodeURIComponent(cleanPhone) + "%0A";
+            waMsg += "• *Move Size:* " + encodeURIComponent(selectedSize) + "%0A";
+            waMsg += "• *From:* " + encodeURIComponent(fromVal) + "%0A";
+            waMsg += "• *To:* " + encodeURIComponent(toVal) + "%0A";
+            waMsg += "• *Move Date:* " + encodeURIComponent(dateVal) + "%0A";
+            waMsg += "• *Requirement:* Free Doorstep Survey & Custom Quote%0A%0A";
+            waMsg += "Please confirm survey coordinator slot.";
+            const waUrl = "https://wa.me/918286864002?text=" + waMsg;
+            const ajaxUrl = '<?php echo esc_url(admin_url('admin-ajax.php')); ?>';
+
+            let redirected = false;
+            function sendToWhatsApp() {
+                if (redirected) return;
+                redirected = true;
+                if (submitBtn) {
+                    submitBtn.innerHTML = '<span><i class="fas fa-check"></i> Saved! Opening WhatsApp...</span>';
+                }
+                setTimeout(function() {
+                    window.location.href = waUrl;
+                }, 300);
+            }
+
+            try {
+                fetch(ajaxUrl, {
+                    method: 'POST',
+                    body: formData,
+                    keepalive: true
+                })
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                    sendToWhatsApp();
+                })
+                .catch(function(err) {
+                    sendToWhatsApp();
+                });
+            } catch(e) {
+                sendToWhatsApp();
+            }
+
+            setTimeout(sendToWhatsApp, 800);
+            return false;
+        });
+    }
+
+    function wireQuoteButtons() {
+        // 1. Pricing Packages buttons (.amar-rate-btn)
+        document.querySelectorAll('.amar-rate-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const card = btn.closest('.amar-rate-card');
+                let detectedSize = '1 BHK';
+                if (card) {
+                    const txt = card.innerText || '';
+                    if (txt.includes('1 RK')) detectedSize = '1 RK';
+                    else if (txt.includes('1 BHK')) detectedSize = '1 BHK';
+                    else if (txt.includes('2 BHK')) detectedSize = '2 BHK';
+                    else if (txt.includes('3 BHK') || txt.includes('Villa')) detectedSize = '3 BHK';
+                }
+                window.amarOpenQuoteModal({ size: detectedSize, source: 'Pricing Packages' });
+            });
+        });
+
+        // 2. Corridor buttons (.amar-corridor-btn)
+        document.querySelectorAll('.amar-corridor-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const card = btn.closest('.amar-corridor-card');
+                let fromCity = '';
+                let toCity = '';
+                if (card) {
+                    const title = card.querySelector('h3, h4, [class*="title"]') || card;
+                    const txt = title.innerText || '';
+                    const parts = txt.split(/→|->|to/i);
+                    if (parts.length >= 2) {
+                        fromCity = parts[0].trim().replace(/\n.*$/, '');
+                        toCity = parts[1].trim().replace(/\n.*$/, '');
+                    }
+                }
+                window.amarOpenQuoteModal({
+                    from: fromCity,
+                    to: toCity,
+                    size: '1 BHK',
+                    source: 'Mumbai Corridors'
+                });
+            });
+        });
+    }
+
+        function initAllAmarFrontend() {
+            initHypeHeroCrm();
+            initAmarModalForm();
+            wireQuoteButtons();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initAllAmarFrontend);
+        } else {
+            initAllAmarFrontend();
+        }
+        
     })();
     </script>
     <?php
@@ -1735,6 +2223,10 @@ function hype_crm_render_spreadsheet() {
                 </div>
             </div>
             <div class="hype-topbar-right">
+                <button type="button" class="hype-btn hype-btn-outline" onclick="hypeStartTour()" style="display:inline-flex; align-items:center; gap:6px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    How to Use
+                </button>
                 <button type="button" class="hype-btn hype-btn-dark" onclick="hypeOpenManualModal()">
                     + Add Lead Manually
                 </button>
@@ -2485,6 +2977,148 @@ function hype_crm_render_spreadsheet() {
             }
         });
     }
+
+    // --- Interactive Guided Tutorial System ---
+    const HYPE_TOUR_STEPS = [
+        {
+            target: '.hype-topbar',
+            title: 'Executive Topbar & Actions',
+            text: 'This topbar provides real-time system status (Live CRM), offline lead entry via "+ Add Lead Manually", and instant CSV data export for record-keeping.',
+            placement: 'bottom'
+        },
+        {
+            target: '.hype-kpis',
+            title: 'Performance KPI Metric Cards',
+            text: 'Monitor total inquiries in your pipeline, today\'s fresh leads, moves requiring urgent follow-up, and your overall conversion rate at a glance.',
+            placement: 'bottom'
+        },
+        {
+            target: '.hype-tabs-wrap',
+            title: 'Pipeline Segmentation Tabs',
+            text: 'Easily filter leads by stage: All Active inquiries, uncontacted leads, high-priority moves, converted relocations, or manage Spam and Trash.',
+            placement: 'bottom'
+        },
+        {
+            target: '.hype-toolbar',
+            title: 'Instant Search & Filters',
+            text: 'Search instantly by customer name, phone, or route. Filter inquiries by age (Today, 7 Days, 30 Days) and sort by newest first or priority.',
+            placement: 'bottom'
+        },
+        {
+            target: '.hype-table-wrap',
+            title: 'Interactive Leads Spreadsheet',
+            text: 'Click any row to inspect complete inquiry details and save private staff notes. Use the 1-click action buttons on the right to open pre-filled WhatsApp chats or call the customer directly.',
+            placement: 'top'
+        }
+    ];
+
+    let hypeCurrentStep = 0;
+
+    function hypeStartTour() {
+        hypeCurrentStep = 0;
+        hypeShowStep(0);
+    }
+
+    function hypeShowStep(index) {
+        if (index < 0 || index >= HYPE_TOUR_STEPS.length) {
+            hypeEndTour();
+            return;
+        }
+        hypeCurrentStep = index;
+        const step = HYPE_TOUR_STEPS[index];
+        const targetEl = document.querySelector(step.target);
+        if (!targetEl) {
+            if (index + 1 < HYPE_TOUR_STEPS.length) hypeShowStep(index + 1);
+            else hypeEndTour();
+            return;
+        }
+
+        try {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch(e) {}
+
+        setTimeout(function() {
+            const rect = targetEl.getBoundingClientRect();
+            const spotlight = document.getElementById('hypeTourSpotlight');
+            const card = document.getElementById('hypeTourCard');
+            const arrow = document.getElementById('hypeTourArrow');
+            if (!spotlight || !card || !arrow) return;
+
+            spotlight.style.display = 'block';
+            spotlight.style.top = Math.max(0, rect.top - 6) + 'px';
+            spotlight.style.left = Math.max(0, rect.left - 6) + 'px';
+            spotlight.style.width = (rect.width + 12) + 'px';
+            spotlight.style.height = (rect.height + 12) + 'px';
+
+            document.getElementById('hypeTourStep').textContent = 'Step ' + (index + 1) + ' of ' + HYPE_TOUR_STEPS.length;
+            document.getElementById('hypeTourTitle').textContent = step.title;
+            document.getElementById('hypeTourText').textContent = step.text;
+
+            const backBtn = document.getElementById('hypeTourBackBtn');
+            const nextBtn = document.getElementById('hypeTourNextBtn');
+            backBtn.style.display = index > 0 ? 'block' : 'none';
+            nextBtn.innerHTML = index === HYPE_TOUR_STEPS.length - 1 ? 'Finish Tour &check;' : 'Next &rarr;';
+
+            card.style.display = 'block';
+
+            let cardTop = rect.bottom + 16;
+            let cardLeft = rect.left + (rect.width / 2) - 170;
+
+            if (cardLeft < 20) cardLeft = 20;
+            if (cardLeft + 350 > window.innerWidth) cardLeft = window.innerWidth - 360;
+
+            if (cardTop + 220 > window.innerHeight && rect.top > 240) {
+                cardTop = rect.top - 210;
+                arrow.style.bottom = '-6px';
+                arrow.style.top = 'auto';
+                arrow.style.borderLeft = 'none';
+                arrow.style.borderTop = 'none';
+                arrow.style.borderRight = '1px solid #334155';
+                arrow.style.borderBottom = '1px solid #334155';
+            } else {
+                arrow.style.top = '-6px';
+                arrow.style.bottom = 'auto';
+                arrow.style.borderLeft = '1px solid #334155';
+                arrow.style.borderTop = '1px solid #334155';
+                arrow.style.borderRight = 'none';
+                arrow.style.borderBottom = 'none';
+            }
+
+            arrow.style.left = Math.max(20, Math.min(310, (rect.left + rect.width / 2) - cardLeft - 6)) + 'px';
+            card.style.top = cardTop + 'px';
+            card.style.left = cardLeft + 'px';
+        }, 220);
+    }
+
+    function hypeNextStep() {
+        if (hypeCurrentStep + 1 < HYPE_TOUR_STEPS.length) {
+            hypeShowStep(hypeCurrentStep + 1);
+        } else {
+            hypeEndTour();
+        }
+    }
+
+    function hypePrevStep() {
+        if (hypeCurrentStep > 0) {
+            hypeShowStep(hypeCurrentStep - 1);
+        }
+    }
+
+    function hypeEndTour() {
+        const spotlight = document.getElementById('hypeTourSpotlight');
+        const card = document.getElementById('hypeTourCard');
+        if (spotlight) spotlight.style.display = 'none';
+        if (card) card.style.display = 'none';
+        try { localStorage.setItem('hype_tour_completed', 'true'); } catch(e) {}
+    }
+
+    window.addEventListener('resize', function() {
+        const card = document.getElementById('hypeTourCard');
+        if (card && card.style.display === 'block') {
+            hypeShowStep(hypeCurrentStep);
+        }
+    });
+
     </script>
     <?php
 }
