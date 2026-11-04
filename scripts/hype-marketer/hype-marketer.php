@@ -320,7 +320,7 @@ function hype_crm_inject_frontend_script() {
     @media (min-width: 769px) {
         .footer_2 .elms_left,
         .footer_2 .footer_2_left {
-            padding-left: 95px !important;
+            padding-left: 200px !important;
             float: left !important;
         }
         .footer_2 .elms_right,
