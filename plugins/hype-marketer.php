@@ -788,104 +788,137 @@ function hype_crm_render_spreadsheet() {
     $ajax_nonce = wp_create_nonce('hype_crm_nonce');
     ?>
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap');
-
+    /* Master Minimalist Executive CRM Stylesheet */
     .hype-wrap {
-        margin: 20px 20px 20px 0;
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        margin: 16px 20px 24px 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         color: #0f172a;
         -webkit-font-smoothing: antialiased;
     }
 
     /* Executive Top Bar */
     .hype-topbar {
-        background: linear-gradient(135deg, #091322 0%, #0f1d33 50%, #172554 100%);
+        background: #0f172a;
         color: #ffffff;
-        padding: 22px 28px;
-        border-radius: 16px;
+        padding: 18px 24px;
+        border-radius: 12px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-shadow: 0 12px 30px -8px rgba(9, 19, 34, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         margin-bottom: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        position: relative;
-        overflow: hidden;
-    }
-    .hype-topbar::after {
-        content: '';
-        position: absolute;
-        top: -50%;
-        right: -10%;
-        width: 300px;
-        height: 300px;
-        background: radial-gradient(circle, rgba(238, 29, 35, 0.15) 0%, transparent 70%);
-        pointer-events: none;
+        border: 1px solid #1e293b;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     }
     .hype-topbar-left {
         display: flex;
         align-items: center;
         gap: 16px;
     }
-    .hype-logo-icon {
-        width: 44px;
-        height: 44px;
-        background: linear-gradient(135deg, #ee1d23 0%, #b91c1c 100%);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
-        box-shadow: 0 6px 16px rgba(238, 29, 35, 0.35);
-    }
     .hype-topbar-title h1 {
-        font-size: 23px;
-        font-weight: 800;
+        font-size: 20px;
+        font-weight: 700;
         color: #ffffff;
         margin: 0;
-        letter-spacing: -0.5px;
+        letter-spacing: -0.3px;
         display: flex;
         align-items: center;
         gap: 10px;
     }
     .hype-badge-pulse {
-        background: rgba(16, 185, 129, 0.15);
-        color: #34d399;
-        border: 1px solid rgba(52, 211, 153, 0.35);
+        background: rgba(255, 255, 255, 0.08);
+        color: #cbd5e1;
+        border: 1px solid rgba(255, 255, 255, 0.15);
         font-size: 11px;
-        font-weight: 700;
-        padding: 3px 9px;
-        border-radius: 20px;
+        font-weight: 500;
+        padding: 2px 9px;
+        border-radius: 6px;
         display: inline-flex;
         align-items: center;
         gap: 6px;
     }
-    .hype-badge-pulse::before {
-        content: '';
+    .hype-pulse-dot {
         width: 6px;
         height: 6px;
-        background: #10b981;
         border-radius: 50%;
-        box-shadow: 0 0 10px #10b981;
-        animation: hypePulse 2s infinite;
-    }
-    @keyframes hypePulse {
-        0%, 100% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0.5; transform: scale(1.3); }
+        background: #10b981;
+        display: inline-block;
     }
     .hype-topbar-title p {
         color: #94a3b8;
-        font-size: 13px;
+        font-size: 12.5px;
         margin: 4px 0 0 0;
+        font-weight: 400;
     }
     .hype-topbar-right {
         display: flex;
         align-items: center;
         gap: 10px;
-        z-index: 2;
     }
 
-    /* KPI Summary Cards Strip */
+    /* Minimalist Buttons */
+    .hype-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 8px 14px;
+        border-radius: 7px;
+        font-size: 12.5px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer !important;
+        border: 1px solid transparent;
+        transition: all 0.15s ease;
+        line-height: 1.2;
+    }
+    .hype-btn-white {
+        background: #ffffff;
+        color: #0f172a;
+        border-color: #ffffff;
+    }
+    .hype-btn-white:hover {
+        background: #f1f5f9;
+        color: #0f172a;
+    }
+    .hype-btn-outline-light {
+        background: transparent;
+        color: #e2e8f0;
+        border-color: #334155;
+    }
+    .hype-btn-outline-light:hover {
+        background: rgba(255,255,255,0.06);
+        border-color: #475569;
+        color: #ffffff;
+    }
+    .hype-btn-primary {
+        background: #0f172a;
+        color: #ffffff;
+        border-color: #0f172a;
+    }
+    .hype-btn-primary:hover {
+        background: #1e293b;
+        color: #ffffff;
+    }
+    .hype-btn-outline {
+        background: #ffffff;
+        color: #475569;
+        border-color: #cbd5e1;
+    }
+    .hype-btn-outline:hover {
+        background: #f8fafc;
+        color: #0f172a;
+        border-color: #94a3b8;
+    }
+    .hype-btn-dark {
+        background: #0f172a;
+        color: #ffffff;
+        border-color: #0f172a;
+    }
+    .hype-btn-dark:hover {
+        background: #1e293b;
+    }
+
+    /* Minimalist Metric Cards Strip */
     .hype-kpis {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -895,63 +928,45 @@ function hype_crm_render_spreadsheet() {
     .hype-kpi-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
-        border-radius: 14px;
+        border-radius: 10px;
         padding: 16px 20px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         display: flex;
         justify-content: space-between;
         align-items: center;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .hype-kpi-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 18px -4px rgba(15, 23, 42, 0.08);
     }
     .hype-kpi-info h3 {
-        font-size: 12px;
-        font-weight: 700;
+        font-size: 11px;
+        font-weight: 600;
         color: #64748b;
+        margin: 0 0 6px 0;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        margin: 0 0 6px 0;
     }
     .hype-kpi-info .kpi-num {
         font-size: 26px;
-        font-weight: 800;
+        font-weight: 700;
         color: #0f172a;
-        line-height: 1;
-        letter-spacing: -0.5px;
+        line-height: 1.1;
+        margin: 0;
     }
     .hype-kpi-info .kpi-sub {
         font-size: 11.5px;
         color: #94a3b8;
-        margin-top: 5px;
-        display: flex;
-        align-items: center;
-        gap: 4px;
+        margin-top: 6px;
+        font-weight: 500;
     }
     .hype-kpi-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
+        display: none !important;
     }
-    .kpi-blue { background: #eff6ff; color: #2563eb; }
-    .kpi-amber { background: #fffbeb; color: #d97706; }
-    .kpi-red { background: #fef2f2; color: #dc2626; }
-    .kpi-green { background: #ecfdf5; color: #059669; }
 
-    /* Modern Tabs */
+    /* Minimalist Tabs Navigation */
     .hype-tabs-wrap {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 2px solid #e2e8f0;
+        border-bottom: 1px solid #e2e8f0;
         margin-bottom: 16px;
-        padding-bottom: 0;
     }
     .hype-tabs {
         display: flex;
@@ -959,169 +974,112 @@ function hype_crm_render_spreadsheet() {
         overflow-x: auto;
     }
     .hype-tab {
-        padding: 10px 18px;
+        padding: 10px 14px;
         text-decoration: none;
         color: #64748b;
-        font-weight: 700;
-        font-size: 13.5px;
-        border-bottom: 3px solid transparent;
+        font-weight: 500;
+        font-size: 13px;
+        border-bottom: 2px solid transparent;
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        margin-bottom: -2px;
+        gap: 7px;
+        margin-bottom: -1px;
         transition: all 0.15s ease;
-        white-space: nowrap;
+        cursor: pointer !important;
     }
     .hype-tab:hover {
         color: #0f172a;
     }
     .hype-tab.active {
-        color: #ee1d23;
-        border-bottom-color: #ee1d23;
+        color: #0f172a;
+        border-bottom-color: #0f172a;
+        font-weight: 600;
     }
     .hype-tab-count {
         font-size: 11px;
-        font-weight: 800;
-        padding: 2px 7px;
+        font-weight: 600;
+        padding: 1px 7px;
         border-radius: 10px;
         background: #f1f5f9;
-        color: #475569;
+        color: #64748b;
     }
     .hype-tab.active .hype-tab-count {
-        background: #fee2e2;
-        color: #b91c1c;
+        background: #0f172a;
+        color: #ffffff;
     }
 
-    /* Toolbar / Filters */
+    /* Minimalist Filters Toolbar */
     .hype-toolbar {
         background: #ffffff;
         border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 14px 18px;
+        border-radius: 10px;
+        padding: 12px 16px;
         display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
         align-items: center;
         justify-content: space-between;
+        gap: 12px;
         margin-bottom: 16px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-    }
-    .hype-tool-left {
-        display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+    }
+    .hype-tool-left, .hype-tool-right {
+        display: flex;
         align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
     }
     .hype-search-box {
         position: relative;
     }
     .hype-search-box input {
-        width: 250px;
-        padding: 8px 12px 8px 34px;
-        border: 1.5px solid #cbd5e1;
-        border-radius: 8px;
-        font-size: 13px;
-        font-family: inherit;
+        width: 220px;
+        padding: 7px 12px 7px 32px;
+        border: 1px solid #e2e8f0;
+        border-radius: 7px;
+        font-size: 12.5px;
+        color: #0f172a;
         background: #ffffff;
-        transition: all 0.2s ease;
+        outline: none;
+        transition: border-color 0.15s ease;
     }
     .hype-search-box input:focus {
         border-color: #0f172a;
-        box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
-        outline: none;
     }
-    .hype-search-icon {
+    .hype-search-box::before {
+        content: "";
         position: absolute;
         left: 11px;
         top: 50%;
         transform: translateY(-50%);
-        color: #94a3b8;
-        font-size: 14px;
+        width: 12px;
+        height: 12px;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>') no-repeat center;
         pointer-events: none;
     }
     .hype-select {
-        padding: 8px 12px;
-        border: 1.5px solid #cbd5e1;
-        border-radius: 8px;
-        font-size: 13px;
-        font-family: inherit;
+        padding: 7px 10px;
+        border: 1px solid #e2e8f0;
+        border-radius: 7px;
+        font-size: 12.5px;
+        color: #334155;
         background: #ffffff;
-        color: #1e293b;
-        font-weight: 600;
-        cursor: pointer;
         outline: none;
-        transition: border 0.2s ease;
+        cursor: pointer !important;
     }
     .hype-select:focus {
         border-color: #0f172a;
     }
-    .hype-tool-right {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
 
-    /* Buttons */
-    .hype-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        padding: 8px 16px;
-        border-radius: 8px;
-        font-size: 13px;
-        font-weight: 700;
-        cursor: pointer;
-        text-decoration: none;
-        border: none;
-        transition: all 0.15s ease;
-        font-family: inherit;
-    }
-    .hype-btn-primary {
-        background: linear-gradient(135deg, #ee1d23 0%, #c2030a 100%);
-        color: #fff;
-        box-shadow: 0 4px 12px rgba(238, 29, 35, 0.25);
-    }
-    .hype-btn-primary:hover {
-        background: #c2030a;
-        color: #fff;
-    }
-    .hype-btn-green {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        color: #fff;
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
-    }
-    .hype-btn-green:hover {
-        background: #059669;
-        color: #fff;
-    }
-    .hype-btn-dark {
-        background: #0f172a;
-        color: #fff;
-    }
-    .hype-btn-dark:hover {
-        background: #1e293b;
-    }
-    .hype-btn-outline {
-        background: #fff;
-        border: 1.5px solid #cbd5e1;
-        color: #475569;
-    }
-    .hype-btn-outline:hover {
-        border-color: #0f172a;
-        color: #0f172a;
-    }
-
-    /* Spreadsheet Grid Table */
+    /* Minimalist Spreadsheet Table */
     .hype-sheet-card {
         background: #ffffff;
-        border: 1.5px solid #e2e8f0;
-        border-radius: 14px;
-        box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.05);
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
         overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
     .hype-sheet-scroll {
         overflow-x: auto;
-        max-height: calc(100vh - 310px);
+        max-height: calc(100vh - 300px);
     }
     .hype-sheet-table {
         width: 100%;
@@ -1133,26 +1091,25 @@ function hype_crm_render_spreadsheet() {
     .hype-sheet-table th {
         background: #f8fafc;
         color: #475569;
-        font-size: 11.5px;
-        font-weight: 800;
+        font-size: 11px;
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.6px;
-        padding: 12px 14px;
-        border-bottom: 2px solid #e2e8f0;
-        border-right: 1px solid #e2e8f0;
+        letter-spacing: 0.5px;
+        padding: 10px 14px;
+        border-bottom: 1px solid #e2e8f0;
+        border-right: 1px solid #f1f5f9;
         position: sticky;
         top: 0;
         z-index: 10;
         white-space: nowrap;
-        user-select: none;
     }
     .hype-sheet-table th:last-child {
         border-right: none;
     }
     .hype-sheet-table td {
-        padding: 12px 14px;
-        border-bottom: 1px solid #e2e8f0;
-        border-right: 1px solid #e2e8f0;
+        padding: 11px 14px;
+        border-bottom: 1px solid #f1f5f9;
+        border-right: 1px solid #f8fafc;
         vertical-align: middle;
         background: #ffffff;
         transition: background 0.15s ease;
@@ -1165,210 +1122,198 @@ function hype_crm_render_spreadsheet() {
         transition: background-color 0.15s ease;
     }
     .hype-sheet-table tbody tr:hover td {
-        background: #f1f5f9 !important;
-    }
-    .hype-cust-name-link {
-        font-weight: 700;
-        color: #0f172a;
-        font-size: 13.5px;
-        cursor: pointer;
-        display: inline-block;
-        transition: color 0.15s ease;
-    }
-    .hype-cust-name-link:hover {
-        color: #ee1d23;
-        text-decoration: underline;
-    }
-    .hype-id-tag {
-        cursor: pointer;
-        transition: all 0.15s ease;
-    }
-    .hype-id-tag:hover {
-        background: #e2e8f0;
-        color: #0f172a;
-        border-color: #cbd5e1;
-    }
-    .hype-act-btn, .hype-priority-tag, .hype-status-tag, .hype-tab, .hype-btn {
-        cursor: pointer !important;
+        background: #f8fafc !important;
     }
     .hype-sheet-table tr.selected td {
-        background: #eff6ff !important;
+        background: #f1f5f9 !important;
     }
 
     /* Monospace ID Badge */
     .hype-id-tag {
-        font-family: 'JetBrains Mono', ui-monospace, monospace;
-        font-weight: 700;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-weight: 600;
         color: #64748b;
-        font-size: 12px;
+        font-size: 11.5px;
         background: #f1f5f9;
-        padding: 3px 7px;
-        border-radius: 6px;
+        padding: 3px 6px;
+        border-radius: 5px;
         border: 1px solid #e2e8f0;
+        cursor: pointer;
+    }
+    .hype-id-tag:hover {
+        background: #e2e8f0;
+        color: #0f172a;
     }
 
-    /* Customer Initials & Name */
+    /* Customer Details Cell */
     .hype-customer-cell {
         display: flex;
         align-items: center;
         gap: 10px;
     }
     .hype-avatar-circle {
-        width: 34px;
-        height: 34px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #0b192c 0%, #1e3a8a 100%);
-        color: #fff;
-        font-weight: 800;
-        font-size: 12px;
+        background: #f1f5f9;
+        color: #475569;
         display: flex;
         align-items: center;
         justify-content: center;
+        font-weight: 600;
+        font-size: 11px;
         flex-shrink: 0;
-        box-shadow: 0 2px 6px rgba(11,25,44,0.15);
+        border: 1px solid #e2e8f0;
     }
-    .hype-cust-name {
-        font-weight: 700;
+    .hype-cust-name-link {
+        font-weight: 600;
         color: #0f172a;
-        font-size: 13.5px;
+        font-size: 13px;
+        cursor: pointer;
+        display: inline-block;
+        transition: color 0.15s ease;
+    }
+    .hype-cust-name-link:hover {
+        color: #2563eb;
+        text-decoration: underline;
     }
     .hype-cust-phone {
         font-size: 12px;
-        font-weight: 700;
-        color: #ee1d23;
+        color: #64748b;
         text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
+        display: block;
         margin-top: 1px;
+    }
+    .hype-cust-phone:hover {
+        color: #0f172a;
     }
     .hype-cust-email {
         font-size: 11px;
-        color: #64748b;
+        color: #94a3b8;
         margin-top: 1px;
     }
 
-    /* Route Visual Pill */
+    /* Route Pill */
     .hype-route-pill {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        font-weight: 600;
-        color: #1e293b;
-        font-size: 12.5px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        padding: 4px 9px;
+        border-radius: 6px;
+        font-size: 12px;
+        color: #334155;
     }
-    .route-dot-from { width: 7px; height: 7px; border-radius: 50%; background: #10b981; }
-    .route-dot-to { width: 7px; height: 7px; border-radius: 50%; background: #ee1d23; }
+    .route-dot-from { width: 6px; height: 6px; border-radius: 50%; background: #64748b; }
+    .route-dot-to { width: 6px; height: 6px; border-radius: 50%; background: #0f172a; }
     .route-arrow { color: #94a3b8; font-size: 11px; }
 
-    /* Category Badges */
+    /* Minimalist Badges */
     .hype-badge-size {
-        background: #eff6ff;
-        color: #1d4ed8;
-        border: 1px solid #bfdbfe;
-        font-weight: 800;
+        background: #f1f5f9;
+        color: #334155;
+        border: 1px solid #e2e8f0;
         font-size: 11.5px;
+        font-weight: 600;
         padding: 3px 8px;
         border-radius: 6px;
-        display: inline-block;
     }
     .hype-badge-service {
-        font-size: 12px;
-        font-weight: 600;
-        color: #475569;
-        margin-top: 3px;
+        font-size: 11.5px;
+        color: #64748b;
+        margin-top: 2px;
     }
     .hype-badge-cost {
-        background: #ecfdf5;
-        color: #059669;
-        border: 1px solid #a7f3d0;
-        font-weight: 800;
-        font-size: 12px;
+        background: #f8fafc;
+        color: #334155;
+        border: 1px solid #e2e8f0;
+        font-size: 11.5px;
+        font-weight: 600;
         padding: 3px 8px;
         border-radius: 6px;
         display: inline-block;
     }
     .hype-source-badge {
-        font-size: 11px;
-        font-weight: 700;
-        color: #475569;
+        font-size: 11.5px;
+        color: #64748b;
         background: #f8fafc;
-        border: 1px solid #cbd5e1;
+        border: 1px solid #e2e8f0;
         padding: 3px 8px;
         border-radius: 6px;
         display: inline-flex;
         align-items: center;
-        gap: 4px;
-        white-space: nowrap;
+        gap: 5px;
     }
 
-    /* Interactive Status & Priority Selectors */
-    .hype-status-tag {
-        padding: 6px 10px;
-        border-radius: 8px;
+    /* Minimalist Status & Priority Selectors */
+    .hype-status-tag, .hype-priority-tag {
         font-size: 12px;
-        font-weight: 700;
-        border: 1.5px solid transparent;
-        cursor: pointer;
-        outline: none;
-        font-family: inherit;
-        transition: all 0.2s ease;
-    }
-    .status-new { background: #eff6ff; color: #1d4ed8; border-color: #93c5fd; }
-    .status-contacted { background: #fffbeb; color: #b45309; border-color: #fde68a; }
-    .status-quoted { background: #f5f3ff; color: #6d28d9; border-color: #ddd6fe; }
-    .status-converted { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
-    .status-no_longer_needed { background: #f1f5f9; color: #475569; border-color: #cbd5e1; }
-    .status-spam { background: #fff1f2; color: #be123c; border-color: #fecdd3; }
-    .status-trash { background: #f1f5f9; color: #64748b; border-color: #cbd5e1; }
-
-    .hype-priority-tag {
-        padding: 5px 8px;
+        font-weight: 500;
+        padding: 4px 8px;
         border-radius: 6px;
-        font-size: 11.5px;
-        font-weight: 800;
-        border: 1.5px solid transparent;
-        cursor: pointer;
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        color: #334155;
+        cursor: pointer !important;
         outline: none;
-        font-family: inherit;
     }
-    .priority-urgent { background: #fef2f2; color: #991b1b; border-color: #fca5a5; }
-    .priority-high { background: #fffbeb; color: #92400e; border-color: #fcd34d; }
-    .priority-normal { background: #f8fafc; color: #334155; border-color: #cbd5e1; }
-    .priority-low { background: #f9fafb; color: #6b7280; border-color: #e5e7eb; }
+    .status-new { background: #f8fafc; border-color: #cbd5e1; color: #0f172a; font-weight: 600; }
+    .status-contacted { background: #f8fafc; border-color: #e2e8f0; color: #475569; }
+    .status-quoted { background: #f8fafc; border-color: #e2e8f0; color: #475569; }
+    .status-converted { background: #f0fdf4; border-color: #bbf7d0; color: #166534; font-weight: 600; }
+    .status-no_longer_needed { background: #f8fafc; border-color: #e2e8f0; color: #94a3b8; }
+    .status-spam, .status-trash { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
 
-    /* Action Icon Buttons */
+    .priority-urgent { background: #fffbeb; border-color: #fde68a; color: #92400e; font-weight: 600; }
+    .priority-high { background: #fff7ed; border-color: #fed7aa; color: #9a3412; font-weight: 600; }
+    .priority-normal { background: #f8fafc; border-color: #e2e8f0; color: #475569; }
+    .priority-low { background: #f8fafc; border-color: #f1f5f9; color: #94a3b8; }
+
+    /* Minimalist Action Buttons */
     .hype-actions-cell {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
+        gap: 5px;
     }
     .hype-act-btn {
-        width: 32px;
-        height: 32px;
-        border-radius: 8px;
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: #fff;
         text-decoration: none;
-        border: none;
-        cursor: pointer;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-        font-size: 13px;
-        flex-shrink: 0;
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        color: #64748b !important;
+        cursor: pointer !important;
+        transition: all 0.15s ease;
+        padding: 0;
     }
     .hype-act-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        border-color: #cbd5e1;
+        transform: translateY(-1px);
     }
-    .act-wa { background: #25d366; box-shadow: 0 2px 6px rgba(37, 211, 102, 0.3); }
-    .act-call { background: #2563eb; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3); }
-    .act-view { background: #334155; box-shadow: 0 2px 6px rgba(51, 65, 85, 0.2); }
-    .act-spam { background: #e11d48; box-shadow: 0 2px 6px rgba(225, 29, 72, 0.25); }
-    .act-trash { background: #ef4444; box-shadow: 0 2px 6px rgba(239, 68, 68, 0.25); }
-    .act-restore { background: #10b981; padding: 0 10px; width: auto; font-size: 12px; font-weight: 700; }
+    .act-wa:hover { background: #ecfdf5; border-color: #a7f3d0; color: #059669 !important; }
+    .act-call:hover { background: #eff6ff; border-color: #bfdbfe; color: #2563eb !important; }
+    .act-view:hover { background: #f1f5f9; border-color: #cbd5e1; color: #0f172a !important; }
+    .act-spam:hover { background: #fef2f2; border-color: #fecaca; color: #dc2626 !important; }
+    .act-trash:hover { background: #fef2f2; border-color: #fecaca; color: #dc2626 !important; }
+    .act-restore {
+        width: auto;
+        padding: 0 8px;
+        font-size: 11.5px;
+        font-weight: 600;
+        gap: 4px;
+        background: #ffffff;
+    }
+    .act-restore:hover {
+        background: #ecfdf5;
+        border-color: #a7f3d0;
+        color: #059669 !important;
+    }
 
     /* Toast Notification */
     #hypeToast {
@@ -1377,32 +1322,23 @@ function hype_crm_render_spreadsheet() {
         right: 24px;
         background: #0f172a;
         color: #ffffff;
-        padding: 12px 20px;
-        border-radius: 10px;
-        font-size: 13.5px;
-        font-weight: 700;
-        box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         display: none;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
         z-index: 999999;
-        border: 1px solid rgba(255,255,255,0.1);
-        animation: hypeToastIn 0.25s ease;
-    }
-    @keyframes hypeToastIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Modal / Drawer */
+    /* Modal / Drawer Minimalist */
     .hype-modal-overlay {
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(11, 25, 44, 0.65);
-        backdrop-filter: blur(5px);
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(15, 23, 42, 0.45);
+        backdrop-filter: blur(2px);
         z-index: 99999;
         display: none;
         align-items: center;
@@ -1410,36 +1346,38 @@ function hype_crm_render_spreadsheet() {
     }
     .hype-modal-box {
         background: #ffffff;
-        border-radius: 16px;
-        max-width: 680px;
+        border-radius: 12px;
+        max-width: 650px;
         width: 90%;
-        max-height: 90vh;
+        max-height: 88vh;
         overflow-y: auto;
-        padding: 28px;
-        box-shadow: 0 25px 60px -15px rgba(0,0,0,0.3);
+        padding: 24px;
+        box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15);
         border: 1px solid #e2e8f0;
     }
-    </style>
+</style>
 
     <div class="hype-wrap">
         <!-- Executive Top Bar -->
         <div class="hype-topbar">
             <div class="hype-topbar-left">
-                <div class="hype-logo-icon">📊</div>
+                <div class="hype-logo-icon" style="background: #ffffff; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; padding: 4px; box-sizing: border-box; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
+                    <img src="data:image/png;base64,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" alt="Hype Marketer" style="width: 28px; height: 28px; object-fit: contain; display: block;">
+                </div>
                 <div class="hype-topbar-title">
                     <h1>
                         <span>Hype Marketer</span>
-                        <span class="hype-badge-pulse">Live Spreadsheets CRM</span>
+                        <span class="hype-badge-pulse"><span class="hype-pulse-dot"></span>Live CRM</span>
                     </h1>
                     <p>Capturing every lead across Homepage Hero, Contact Page, Popups & Inquiries • Direct WhatsApp Dispatch</p>
                 </div>
             </div>
             <div class="hype-topbar-right">
-                <button type="button" class="hype-btn hype-btn-primary" onclick="hypeOpenManualModal()">
+                <button type="button" class="hype-btn hype-btn-white" onclick="hypeOpenManualModal()">
                     + Add Lead Manually
                 </button>
-                <a href="<?php echo esc_url(admin_url('admin.php?page=hype-marketer&action=hype_export_csv&tab=' . urlencode($tab))); ?>" class="hype-btn hype-btn-green">
-                    📥 Export to CSV
+                <a href="<?php echo esc_url(admin_url('admin.php?page=hype-marketer&action=hype_export_csv&tab=' . urlencode($tab))); ?>" class="hype-btn hype-btn-outline-light">
+                    Export to CSV
                 </a>
             </div>
         </div>
@@ -1458,14 +1396,14 @@ function hype_crm_render_spreadsheet() {
                 <div class="hype-kpi-info">
                     <h3>Today's Leads</h3>
                     <div class="kpi-num"><?php echo $count_today; ?></div>
-                    <div class="kpi-sub"><span style="color:#10b981; font-weight:700;">● Live</span> Today: <?php echo date('M d'); ?></div>
+                    <div class="kpi-sub"><span style="color:#059669; font-weight:600;">● Live</span> Today: <?php echo date('M d'); ?></div>
                 </div>
                 <div class="hype-kpi-icon kpi-amber">⚡</div>
             </div>
             <div class="hype-kpi-card">
                 <div class="hype-kpi-info">
                     <h3>High Priority</h3>
-                    <div class="kpi-num" style="color:#ee1d23;"><?php echo $count_priority; ?></div>
+                    <div class="kpi-num"><?php echo $count_priority; ?></div>
                     <div class="kpi-sub">Urgent attention needed</div>
                 </div>
                 <div class="hype-kpi-icon kpi-red">🔥</div>
@@ -1473,8 +1411,8 @@ function hype_crm_render_spreadsheet() {
             <div class="hype-kpi-card">
                 <div class="hype-kpi-info">
                     <h3>Converted Moves</h3>
-                    <div class="kpi-num" style="color:#059669;"><?php echo $count_converted; ?></div>
-                    <div class="kpi-sub"><span style="color:#059669; font-weight:700;"><?php echo $conversion_rate; ?>%</span> conversion rate</div>
+                    <div class="kpi-num"><?php echo $count_converted; ?></div>
+                    <div class="kpi-sub"><span style="color:#0f172a; font-weight:600;"><?php echo $conversion_rate; ?>%</span> conversion rate</div>
                 </div>
                 <div class="hype-kpi-icon kpi-green">🏆</div>
             </div>
@@ -1487,22 +1425,22 @@ function hype_crm_render_spreadsheet() {
                     📋 All Active <span class="hype-tab-count"><?php echo $count_active; ?></span>
                 </a>
                 <a href="<?php echo esc_url(admin_url('admin.php?page=hype-marketer&tab=new')); ?>" class="hype-tab <?php echo $tab === 'new' ? 'active' : ''; ?>">
-                    🔵 New / Uncontacted <span class="hype-tab-count"><?php echo $count_new; ?></span>
+                    New / Uncontacted <span class="hype-tab-count"><?php echo $count_new; ?></span>
                 </a>
                 <a href="<?php echo esc_url(admin_url('admin.php?page=hype-marketer&tab=priority')); ?>" class="hype-tab <?php echo $tab === 'priority' ? 'active' : ''; ?>">
-                    🔥 High Priority <span class="hype-tab-count"><?php echo $count_priority; ?></span>
+                    High Priority <span class="hype-tab-count"><?php echo $count_priority; ?></span>
                 </a>
                 <a href="<?php echo esc_url(admin_url('admin.php?page=hype-marketer&tab=converted')); ?>" class="hype-tab <?php echo $tab === 'converted' ? 'active' : ''; ?>">
                     🏆 Converted <span class="hype-tab-count"><?php echo $count_converted; ?></span>
                 </a>
                 <a href="<?php echo esc_url(admin_url('admin.php?page=hype-marketer&tab=no_longer_needed')); ?>" class="hype-tab <?php echo $tab === 'no_longer_needed' ? 'active' : ''; ?>">
-                    ⚪ No Longer Needed <span class="hype-tab-count"><?php echo $count_no_longer_needed; ?></span>
+                    No Longer Needed <span class="hype-tab-count"><?php echo $count_no_longer_needed; ?></span>
                 </a>
                 <a href="<?php echo esc_url(admin_url('admin.php?page=hype-marketer&tab=spam')); ?>" class="hype-tab <?php echo $tab === 'spam' ? 'active' : ''; ?>">
-                    🛑 Spam <span class="hype-tab-count"><?php echo $count_spam; ?></span>
+                    Spam <span class="hype-tab-count"><?php echo $count_spam; ?></span>
                 </a>
                 <a href="<?php echo esc_url(admin_url('admin.php?page=hype-marketer&tab=trash')); ?>" class="hype-tab <?php echo $tab === 'trash' ? 'active' : ''; ?>">
-                    🗑️ Trash <span class="hype-tab-count"><?php echo $count_trash; ?></span>
+                    Trash <span class="hype-tab-count"><?php echo $count_trash; ?></span>
                 </a>
             </div>
             <div style="font-size: 12px; color: #64748b; font-weight: 700;">
@@ -1538,7 +1476,7 @@ function hype_crm_render_spreadsheet() {
                     <option value="">🎯 Priority: All</option>
                     <option value="urgent" <?php selected($priority_filter, 'urgent'); ?>>🔥 Urgent</option>
                     <option value="high" <?php selected($priority_filter, 'high'); ?>>⚡ High</option>
-                    <option value="normal" <?php selected($priority_filter, 'normal'); ?>>🔵 Normal</option>
+                    <option value="normal" <?php selected($priority_filter, 'normal'); ?>>Normal</option>
                     <option value="low" <?php selected($priority_filter, 'low'); ?>>💤 Low</option>
                 </select>
 
@@ -1638,7 +1576,7 @@ function hype_crm_render_spreadsheet() {
                                     <select class="hype-priority-tag priority-<?php echo esc_attr($pr); ?>" onchange="hypeChangePriority(<?php echo esc_attr($l->id); ?>, this.value, this)" onclick="event.stopPropagation();">
                                         <option value="urgent" <?php selected($pr, 'urgent'); ?>>🔥 Urgent</option>
                                         <option value="high" <?php selected($pr, 'high'); ?>>⚡ High</option>
-                                        <option value="normal" <?php selected($pr, 'normal'); ?>>🔵 Normal</option>
+                                        <option value="normal" <?php selected($pr, 'normal'); ?>>Normal</option>
                                         <option value="low" <?php selected($pr, 'low'); ?>>💤 Low</option>
                                     </select>
                                 </td>
@@ -1711,34 +1649,20 @@ function hype_crm_render_spreadsheet() {
                                     <div class="hype-actions-cell">
                                         <?php if ($tab !== 'trash') : ?>
                                             <!-- 1-Click WhatsApp -->
-                                            <a href="https://wa.me/<?php echo esc_attr($wa_phone); ?>?text=<?php echo rawurlencode('Hello ' . $display_name . ', thank you for contacting Amar Packers & Movers. Regarding your inquiry:'); ?>" target="_blank" class="hype-act-btn act-wa" title="Open WhatsApp Chat" onclick="event.stopPropagation();">
-                                                💬
-                                            </a>
+                                            <a href="https://wa.me/<?php echo esc_attr($wa_phone); ?>?text=<?php echo rawurlencode('Hello ' . $display_name . ', thank you for contacting Amar Packers & Movers. Regarding your inquiry:'); ?>" target="_blank" class="hype-act-btn act-wa" title="Open WhatsApp Chat" onclick="event.stopPropagation();"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></a>
                                             <!-- 1-Click Phone Call -->
-                                            <a href="tel:<?php echo esc_attr($l->phone); ?>" class="hype-act-btn act-call" title="Call Customer" onclick="event.stopPropagation();">
-                                                📞
-                                            </a>
+                                            <a href="tel:<?php echo esc_attr($l->phone); ?>" class="hype-act-btn act-call" title="Call Customer" onclick="event.stopPropagation();"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a>
                                             <!-- View Details / Notes -->
-                                            <button type="button" class="hype-act-btn act-view" onclick="event.stopPropagation(); hypeOpenDetailModalById(<?php echo intval($l->id); ?>);" title="View Full Details & Notes">
-                                                👁️
-                                            </button>
+                                            <button type="button" class="hype-act-btn act-view" onclick="event.stopPropagation(); hypeOpenDetailModalById(<?php echo intval($l->id); ?>);" title="View Full Details & Notes"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
                                             <!-- Mark as Spam -->
-                                            <button type="button" class="hype-act-btn act-spam" onclick="event.stopPropagation(); hypeToggleSpam(<?php echo intval($l->id); ?>, 1);" title="Mark as Spam">
-                                                🛑
-                                            </button>
+                                            <button type="button" class="hype-act-btn act-spam" onclick="event.stopPropagation(); hypeToggleSpam(<?php echo intval($l->id); ?>, 1);" title="Mark as Spam"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></button>
                                             <!-- Move to Trash -->
-                                            <button type="button" class="hype-act-btn act-trash" onclick="event.stopPropagation(); hypeMoveToTrash(<?php echo intval($l->id); ?>);" title="Move to Trash">
-                                                🗑️
-                                            </button>
+                                            <button type="button" class="hype-act-btn act-trash" onclick="event.stopPropagation(); hypeMoveToTrash(<?php echo intval($l->id); ?>);" title="Move to Trash"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
                                         <?php else : ?>
                                             <!-- Restore -->
-                                            <button type="button" class="hype-act-btn act-restore" onclick="event.stopPropagation(); hypeRestoreTrash(<?php echo intval($l->id); ?>);" title="Restore Lead">
-                                                ♻️ Restore
-                                            </button>
+                                            <button type="button" class="hype-act-btn act-restore" onclick="event.stopPropagation(); hypeRestoreTrash(<?php echo intval($l->id); ?>);" title="Restore Lead"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg> Restore</button>
                                             <!-- Delete Permanent -->
-                                            <button type="button" class="hype-act-btn act-trash" onclick="event.stopPropagation(); hypeDeletePermanent(<?php echo intval($l->id); ?>);" title="Delete Permanently">
-                                                ❌
-                                            </button>
+                                            <button type="button" class="hype-act-btn act-trash" onclick="event.stopPropagation(); hypeDeletePermanent(<?php echo intval($l->id); ?>);" title="Delete Permanently"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
                                         <?php endif; ?>
                                     </div>
                                 </td>
@@ -1836,7 +1760,7 @@ function hype_crm_render_spreadsheet() {
                         <select name="priority" class="hype-select" style="width:100%;">
                             <option value="urgent">🔥 Urgent</option>
                             <option value="high">⚡ High</option>
-                            <option value="normal" selected>🔵 Normal</option>
+                            <option value="normal" selected>Normal</option>
                             <option value="low">💤 Low</option>
                         </select>
                     </div>
