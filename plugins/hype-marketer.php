@@ -671,7 +671,7 @@ function hype_crm_inject_frontend_script() {
     <div id="amarQuoteModal" class="amar-quote-modal-overlay" style="display:none;">
         <div class="amar-quote-modal-backdrop" onclick="amarCloseQuoteModal()"></div>
         <div class="amar-quote-modal-dialog">
-            <button type="button" class="amar-quote-modal-close" onclick="amarCloseQuoteModal()" title="Close">&times;</button>
+            <button type="button" id="amarQuoteModalCloseBtn" class="amar-quote-modal-close" onclick="amarCloseQuoteModal(); event.stopPropagation();" title="Close Popup" style="position:absolute !important; top:12px !important; right:12px !important; width:38px !important; height:38px !important; border-radius:50% !important; background:#f1f5f9 !important; border:1px solid #cbd5e1 !important; font-size:24px !important; font-weight:700 !important; line-height:1 !important; color:#334155 !important; cursor:pointer !important; display:flex !important; align-items:center !important; justify-content:center !important; z-index:9999 !important;">&times;</button>
             
             <div class="amar-calc-card" style="border:none; box-shadow:none; padding:0; background:transparent;">
                 <div style="font-size: 11.5px; font-weight: 800; color: #ee1d23; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px;">✦ FREE SURVEY &amp; CUSTOM QUOTE</div>
@@ -986,6 +986,7 @@ function hype_crm_inject_frontend_script() {
         if (toInp && options.to) toInp.value = options.to;
 
         modal.classList.add('active');
+        modal.style.setProperty('display', 'flex', 'important');
         document.body.style.overflow = 'hidden';
 
         setTimeout(function() {
@@ -996,7 +997,10 @@ function hype_crm_inject_frontend_script() {
 
     window.amarCloseQuoteModal = function() {
         const modal = document.getElementById('amarQuoteModal');
-        if (modal) modal.classList.remove('active');
+        if (modal) {
+            modal.classList.remove('active');
+            modal.style.setProperty('display', 'none', 'important');
+        }
         document.body.style.overflow = '';
     };
 
