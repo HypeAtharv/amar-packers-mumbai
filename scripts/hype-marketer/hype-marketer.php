@@ -287,6 +287,105 @@ add_action('wp_footer', 'hype_crm_inject_frontend_script', 999);
 
 function hype_crm_inject_frontend_script() {
     ?>
+    <style id="hype-footer-polish">
+    /* Deep rich background for modern look */
+    #site_footer {
+        position: relative;
+        background: #0f172a !important;
+    }
+    #site_footer, #site_footer p, #site_footer div, #site_footer span {
+        color: #94a3b8;
+    }
+    #site_footer h4 {
+        color: #ffffff !important;
+        font-size: 18px !important;
+        font-weight: 700 !important;
+        margin-bottom: 20px !important;
+    }
+    #site_footer a {
+        color: #cbd5e1 !important;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    #site_footer a:hover {
+        color: #ee1d23 !important;
+    }
+    /* Bottom bar styling */
+    .footer_2 {
+        background: #090d16 !important;
+        border-top: 1px solid #1e293b !important;
+        padding: 16px 0 !important;
+    }
+    /* Desktop: Inset bottom bar text so corner floating widgets NEVER overlap */
+    @media (min-width: 769px) {
+        .footer_2 .elms_left,
+        .footer_2 .footer_2_left {
+            padding-left: 95px !important;
+            float: left !important;
+        }
+        .footer_2 .elms_right,
+        .footer_2 .footer_2_right {
+            padding-right: 95px !important;
+            float: right !important;
+        }
+    }
+    /* Mobile: Clearance for sticky bottom bar & no overlap */
+    @media (max-width: 768px) {
+        #site_footer {
+            padding-bottom: 120px !important;
+            padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)) !important;
+        }
+        body {
+            padding-bottom: 110px !important;
+        }
+        .footer_2 .row.elms_row,
+        .footer_2 .clr {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            width: 100% !important;
+        }
+        .footer_2 .elms_left,
+        .footer_2 .footer_2_left,
+        .footer_2 .elms_right,
+        .footer_2 .footer_2_right {
+            float: none !important;
+            width: 100% !important;
+            text-align: center !important;
+            padding-left: 15px !important;
+            padding-right: 15px !important;
+            margin: 4px 0 !important;
+        }
+        .footer_2 .cz_elm {
+            margin-top: 4px !important;
+            margin-bottom: 4px !important;
+        }
+        /* Hide duplicate theme nav */
+        .xtra-fixed-mobile-nav,
+        .cz_fixed_mobile_nav,
+        .cz_fixed_bottom_border {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+        /* Hide duplicate floating round WhatsApp button because bottom bar already has WhatsApp */
+        .joinchat,
+        div[class*="joinchat"],
+        .cz_whatsapp_fixed {
+            display: none !important;
+            visibility: hidden !important;
+        }
+        /* Position back-to-top button above sticky bar on mobile */
+        .cz_back_to_top,
+        #cz_back_to_top,
+        .back_to_top {
+            bottom: 85px !important;
+            right: 15px !important;
+        }
+    }
+    </style>
     <script>
     (function() {
         function initHypeHeroCrm() {
@@ -1415,6 +1514,17 @@ function hype_crm_render_spreadsheet() {
         align-items: center;
         justify-content: center;
     }
+    .hype-modal-header-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
     .hype-modal-box {
         background: #ffffff;
         border-radius: 12px;
@@ -1461,7 +1571,7 @@ function hype_crm_render_spreadsheet() {
                     <div class="kpi-num"><?php echo $count_active; ?></div>
                     <div class="kpi-sub">Total verified inquiries</div>
                 </div>
-                <div class="hype-kpi-icon">📋</div>
+                <div class="hype-kpi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div>
             </div>
             <div class="hype-kpi-card">
                 <div class="hype-kpi-info">
@@ -1469,7 +1579,7 @@ function hype_crm_render_spreadsheet() {
                     <div class="kpi-num"><?php echo $count_today; ?></div>
                     <div class="kpi-sub"><span style="color:#10b981; font-weight:600;">● Live</span> Today: <?php echo date('M d'); ?></div>
                 </div>
-                <div class="hype-kpi-icon">⚡</div>
+                <div class="hype-kpi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg></div>
             </div>
             <div class="hype-kpi-card">
                 <div class="hype-kpi-info">
@@ -1477,7 +1587,7 @@ function hype_crm_render_spreadsheet() {
                     <div class="kpi-num"><?php echo $count_priority; ?></div>
                     <div class="kpi-sub">Urgent attention needed</div>
                 </div>
-                <div class="hype-kpi-icon">🔥</div>
+                <div class="hype-kpi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>
             </div>
             <div class="hype-kpi-card">
                 <div class="hype-kpi-info">
@@ -1485,7 +1595,7 @@ function hype_crm_render_spreadsheet() {
                     <div class="kpi-num"><?php echo $count_converted; ?></div>
                     <div class="kpi-sub"><span style="color:#0f172a; font-weight:600;"><?php echo $conversion_rate; ?>%</span> conversion rate</div>
                 </div>
-                <div class="hype-kpi-icon">🏆</div>
+                <div class="hype-kpi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
             </div>
         </div>
 
@@ -1527,36 +1637,36 @@ function hype_crm_render_spreadsheet() {
             <div class="hype-tool-left">
                 <!-- Search Box -->
                 <div class="hype-search-box">
-                    <span class="hype-search-icon">🔍</span>
+                    <span class="hype-search-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
                     <input type="text" id="hypeLiveSearch" name="s_lead" placeholder="Search name, phone, route..." value="<?php echo esc_attr($search_query); ?>" onkeyup="hypeClientSearch(this.value)">
                 </div>
 
                 <!-- Age / Time Filter -->
                 <select name="time_filter" class="hype-select" onchange="this.form.submit()">
-                    <option value="all" <?php selected($time_filter, 'all'); ?>>📅 Time: All Time</option>
-                    <option value="today" <?php selected($time_filter, 'today'); ?>>📅 Time: Today</option>
-                    <option value="7days" <?php selected($time_filter, '7days'); ?>>📅 Time: Past 7 Days</option>
-                    <option value="1month" <?php selected($time_filter, '1month'); ?>>📅 Time: 1 Month Old</option>
-                    <option value="3months" <?php selected($time_filter, '3months'); ?>>📅 Time: 3 Months Old</option>
-                    <option value="6months" <?php selected($time_filter, '6months'); ?>>📅 Time: 6 Months Old</option>
-                    <option value="older6months" <?php selected($time_filter, 'older6months'); ?>>📅 Time: Older than 6 Months</option>
+                    <option value="all" <?php selected($time_filter, 'all'); ?>>Time: All Time</option>
+                    <option value="today" <?php selected($time_filter, 'today'); ?>>Time: Today</option>
+                    <option value="7days" <?php selected($time_filter, '7days'); ?>>Time: Past 7 Days</option>
+                    <option value="1month" <?php selected($time_filter, '1month'); ?>>Time: 1 Month Old</option>
+                    <option value="3months" <?php selected($time_filter, '3months'); ?>>Time: 3 Months Old</option>
+                    <option value="6months" <?php selected($time_filter, '6months'); ?>>Time: 6 Months Old</option>
+                    <option value="older6months" <?php selected($time_filter, 'older6months'); ?>>Time: Older than 6 Months</option>
                 </select>
 
                 <!-- Priority Filter -->
                 <select name="priority_filter" class="hype-select" onchange="this.form.submit()">
-                    <option value="">🎯 Priority: All</option>
-                    <option value="urgent" <?php selected($priority_filter, 'urgent'); ?>>🔥 Urgent</option>
-                    <option value="high" <?php selected($priority_filter, 'high'); ?>>⚡ High</option>
+                    <option value="">Priority: All</option>
+                    <option value="urgent" <?php selected($priority_filter, 'urgent'); ?>>Urgent</option>
+                    <option value="high" <?php selected($priority_filter, 'high'); ?>>High</option>
                     <option value="normal" <?php selected($priority_filter, 'normal'); ?>>Normal</option>
-                    <option value="low" <?php selected($priority_filter, 'low'); ?>>💤 Low</option>
+                    <option value="low" <?php selected($priority_filter, 'low'); ?>>Low</option>
                 </select>
 
                 <!-- Sort By -->
                 <select name="sort_by" class="hype-select" onchange="this.form.submit()">
-                    <option value="newest" <?php selected($sort_by, 'newest'); ?>>⚡ Sort: Newest First</option>
-                    <option value="oldest" <?php selected($sort_by, 'oldest'); ?>>🕒 Sort: Oldest First</option>
-                    <option value="priority_desc" <?php selected($sort_by, 'priority_desc'); ?>>🔥 Sort: Highest Priority</option>
-                    <option value="name_asc" <?php selected($sort_by, 'name_asc'); ?>>🔤 Sort: Name (A-Z)</option>
+                    <option value="newest" <?php selected($sort_by, 'newest'); ?>>Sort: Newest First</option>
+                    <option value="oldest" <?php selected($sort_by, 'oldest'); ?>>Sort: Oldest First</option>
+                    <option value="priority_desc" <?php selected($sort_by, 'priority_desc'); ?>>Sort: Highest Priority</option>
+                    <option value="name_asc" <?php selected($sort_by, 'name_asc'); ?>>Sort: Name (A-Z)</option>
                 </select>
 
                 <button type="submit" class="hype-btn hype-btn-dark" style="padding:7px 12px; font-size:12px;">Apply Filter</button>
@@ -1607,7 +1717,7 @@ function hype_crm_render_spreadsheet() {
                         <?php if (empty($leads)) : ?>
                             <tr>
                                 <td colspan="11" style="text-align: center; padding: 50px 20px; color: #94a3b8;">
-                                    <div style="font-size: 36px; margin-bottom: 10px;">📂</div>
+                                    <div style="margin-bottom: 10px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
                                     <div style="font-size: 15px; font-weight: 700; color: #475569;">No leads found in this view.</div>
                                     <p style="font-size: 12.5px; margin-top: 4px; color: #94a3b8;">Inquiries submitted anywhere on the website will instantly appear in this spreadsheet.</p>
                                 </td>
@@ -1626,11 +1736,9 @@ function hype_crm_render_spreadsheet() {
 
                                 // Source icon badge
                                 $source_label = esc_html($l->source);
-                                $source_icon = '📝';
-                                if (stripos($source_label, 'Hero') !== false) $source_icon = '📱';
-                                elseif (stripos($source_label, 'Contact') !== false) $source_icon = '📩';
-                                elseif (stripos($source_label, 'Popup') !== false || stripos($source_label, 'Modal') !== false) $source_icon = '💬';
-                                elseif (stripos($source_label, 'Manual') !== false) $source_icon = '✍️';
+                                
+                                
+                                
                             ?>
                             <tr id="lead-row-<?php echo esc_attr($l->id); ?>" class="hype-lead-row" onclick="hypeHandleRowClick(event, <?php echo intval($l->id); ?>)" title="Click anywhere on row to view full lead details">
                                 <td style="text-align:center;" onclick="event.stopPropagation();">
@@ -1645,10 +1753,10 @@ function hype_crm_render_spreadsheet() {
                                 </td>
                                 <td onclick="event.stopPropagation();">
                                     <select class="hype-priority-tag priority-<?php echo esc_attr($pr); ?>" onchange="hypeChangePriority(<?php echo esc_attr($l->id); ?>, this.value, this)" onclick="event.stopPropagation();">
-                                        <option value="urgent" <?php selected($pr, 'urgent'); ?>>🔥 Urgent</option>
-                                        <option value="high" <?php selected($pr, 'high'); ?>>⚡ High</option>
+                                        <option value="urgent" <?php selected($pr, 'urgent'); ?>>Urgent</option>
+                                        <option value="high" <?php selected($pr, 'high'); ?>>High</option>
                                         <option value="normal" <?php selected($pr, 'normal'); ?>>Normal</option>
-                                        <option value="low" <?php selected($pr, 'low'); ?>>💤 Low</option>
+                                        <option value="low" <?php selected($pr, 'low'); ?>>Low</option>
                                     </select>
                                 </td>
                                 <td>
@@ -1657,10 +1765,10 @@ function hype_crm_render_spreadsheet() {
                                         <div>
                                             <div class="hype-cust-name-link" onclick="event.stopPropagation(); hypeOpenDetailModalById(<?php echo intval($l->id); ?>);" title="Click to view full lead details"><?php echo $display_name; ?></div>
                                             <a href="tel:<?php echo esc_attr($l->phone); ?>" class="hype-cust-phone" onclick="event.stopPropagation();">
-                                                📞 <?php echo esc_html($l->phone); ?>
+                                                <?php echo esc_html($l->phone); ?>
                                             </a>
                                             <?php if (!empty($l->email)) : ?>
-                                                <div class="hype-cust-email">✉️ <?php echo esc_html($l->email); ?></div>
+                                                <div class="hype-cust-email"><?php echo esc_html($l->email); ?></div>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -1670,12 +1778,12 @@ function hype_crm_render_spreadsheet() {
                                         <div class="hype-route-pill">
                                             <span class="route-dot-from" title="Origin"></span>
                                             <span><?php echo esc_html($l->moving_from); ?></span>
-                                            <span class="route-arrow">➔</span>
+                                            <span class="route-arrow">&rarr;</span>
                                             <span class="route-dot-to" title="Destination"></span>
                                             <span><?php echo esc_html($l->moving_to); ?></span>
                                         </div>
                                         <?php if (!empty($l->move_date)) : ?>
-                                            <div style="font-size: 11px; color: #64748b; margin-top: 3px;">🗓️ Move: <?php echo esc_html($l->move_date); ?></div>
+                                            <div style="font-size: 11px; color: #64748b; margin-top: 3px;">Move: <?php echo esc_html($l->move_date); ?></div>
                                         <?php endif; ?>
                                     <?php else : ?>
                                         <span style="color: #cbd5e1;">—</span>
@@ -1700,10 +1808,7 @@ function hype_crm_render_spreadsheet() {
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <span class="hype-source-badge">
-                                        <span><?php echo $source_icon; ?></span>
-                                        <span><?php echo $source_label; ?></span>
-                                    </span>
+                                    <span class="hype-source-badge"><?php echo esc_html($source_label); ?></span>
                                 </td>
                                 <td onclick="event.stopPropagation();">
                                     <select class="hype-status-tag status-<?php echo esc_attr($l->status); ?>" onchange="hypeChangeStatus(<?php echo esc_attr($l->id); ?>, this.value, this)" onclick="event.stopPropagation();">
@@ -1756,7 +1861,7 @@ function hype_crm_render_spreadsheet() {
         <div class="hype-modal-box">
             <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e2e8f0; padding-bottom:14px; margin-bottom:18px;">
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <div style="font-size:24px;">📋</div>
+                    <div class="hype-modal-header-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
                     <div>
                         <h3 id="hypeModalLeadTitle" style="margin:0; font-size:18px; font-weight:800; color:#0b192c;">Lead Details</h3>
                         <p id="hypeModalSubtitle" style="margin:2px 0 0 0; font-size:12px; color:#64748b;">Full inquiry submission details</p>
@@ -1792,7 +1897,7 @@ function hype_crm_render_spreadsheet() {
         <div class="hype-modal-box">
             <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e2e8f0; padding-bottom:14px; margin-bottom:18px;">
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <div style="font-size:24px;">✍️</div>
+                    <div class="hype-modal-header-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></div>
                     <div>
                         <h3 style="margin:0; font-size:18px; font-weight:800; color:#0b192c;">+ Add New Lead Manually</h3>
                         <p style="margin:2px 0 0 0; font-size:12px; color:#64748b;">Record an offline phone call, walk-in, or direct inquiry</p>
@@ -1829,10 +1934,10 @@ function hype_crm_render_spreadsheet() {
                     <div>
                         <label style="display:block; font-size:12px; font-weight:700; margin-bottom:5px;">Priority</label>
                         <select name="priority" class="hype-select" style="width:100%;">
-                            <option value="urgent">🔥 Urgent</option>
-                            <option value="high">⚡ High</option>
+                            <option value="urgent">Urgent</option>
+                            <option value="high">High</option>
                             <option value="normal" selected>Normal</option>
-                            <option value="low">💤 Low</option>
+                            <option value="low">Low</option>
                         </select>
                     </div>
                 </div>
@@ -1942,7 +2047,7 @@ function hype_crm_render_spreadsheet() {
                 security: ajaxNonce
             })
         }).then(res => res.json()).then(d => {
-            if (d.success) showHypeToast('✓ Status updated to <strong>' + newStatus + '</strong>');
+            if (d.success) showHypeToast('Status updated to <strong>' + newStatus + '</strong>');
         });
     }
 
@@ -1959,7 +2064,7 @@ function hype_crm_render_spreadsheet() {
                 security: ajaxNonce
             })
         }).then(res => res.json()).then(d => {
-            if (d.success) showHypeToast('✓ Priority set to <strong>' + newPriority + '</strong>');
+            if (d.success) showHypeToast('Priority set to <strong>' + newPriority + '</strong>');
         });
     }
 
@@ -1978,7 +2083,7 @@ function hype_crm_render_spreadsheet() {
             if (d.success) {
                 const row = document.getElementById('lead-row-' + leadId);
                 if (row) row.remove();
-                showHypeToast('🗑️ Lead #' + leadId + ' moved to Trash');
+                showHypeToast('Lead #' + leadId + ' moved to Trash');
             }
         });
     }
@@ -1997,7 +2102,7 @@ function hype_crm_render_spreadsheet() {
             if (d.success) {
                 const row = document.getElementById('lead-row-' + leadId);
                 if (row) row.remove();
-                showHypeToast('♻️ Lead #' + leadId + ' restored to Active');
+                showHypeToast('Lead #' + leadId + ' restored to Active');
             }
         });
     }
@@ -2017,7 +2122,7 @@ function hype_crm_render_spreadsheet() {
             if (d.success) {
                 const row = document.getElementById('lead-row-' + leadId);
                 if (row) row.remove();
-                showHypeToast('❌ Lead permanently deleted');
+                showHypeToast('Lead permanently deleted');
             }
         });
     }
@@ -2038,7 +2143,7 @@ function hype_crm_render_spreadsheet() {
             if (d.success) {
                 const row = document.getElementById('lead-row-' + leadId);
                 if (row) row.remove();
-                showHypeToast('🛑 Marked as Spam');
+                showHypeToast('Marked as Spam');
             }
         });
     }
@@ -2092,15 +2197,15 @@ function hype_crm_render_spreadsheet() {
         document.getElementById('hypeModalCustNamePhone').innerHTML = '<strong>' + custName + '</strong> &bull; <a href="tel:' + lead.phone + '" style="color:#ee1d23; text-decoration:none; font-weight:700;">' + lead.phone + '</a>';
         
         let quickBtnsHtml = '';
-        quickBtnsHtml += '<a href="https://wa.me/' + waPhone + '?text=' + encodeURIComponent('Hello ' + custName + ', regarding your moving inquiry with Amar Packers & Movers:') + '" target="_blank" class="hype-btn hype-btn-green" style="padding:6px 12px; font-size:12px;">💬 WhatsApp</a>';
-        quickBtnsHtml += '<a href="tel:' + lead.phone + '" class="hype-btn hype-btn-dark" style="padding:6px 12px; font-size:12px;">📞 Call</a>';
+        quickBtnsHtml += '<a href="https://wa.me/' + waPhone + '?text=' + encodeURIComponent('Hello ' + custName + ', regarding your moving inquiry with Amar Packers & Movers:') + '" target="_blank" class="hype-btn hype-btn-green" style="padding:6px 12px; font-size:12px;">WhatsApp</a>';
+        quickBtnsHtml += '<a href="tel:' + lead.phone + '" class="hype-btn hype-btn-dark" style="padding:6px 12px; font-size:12px;">Call</a>';
         document.getElementById('hypeModalQuickBtns').innerHTML = quickBtnsHtml;
 
         let html = '<table style="width:100%; font-size:13px; border-collapse:collapse;">';
         html += '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:8px 0; color:#64748b; width:130px;"><strong>Status:</strong></td><td><span class="hype-status-tag status-' + lead.status + '">' + lead.status.toUpperCase() + '</span></td></tr>';
         html += '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:8px 0; color:#64748b;"><strong>Priority:</strong></td><td><span class="hype-priority-tag priority-' + lead.priority + '">' + lead.priority.toUpperCase() + '</span></td></tr>';
         if (lead.email) html += '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:8px 0; color:#64748b;"><strong>Email:</strong></td><td><a href="mailto:' + lead.email + '" style="color:#2563eb;">' + lead.email + '</a></td></tr>';
-        if (lead.moving_from || lead.moving_to) html += '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:8px 0; color:#64748b;"><strong>Route:</strong></td><td><strong style="color:#0f172a;">' + (lead.moving_from || '') + '</strong> ➔ <strong style="color:#0f172a;">' + (lead.moving_to || '') + '</strong></td></tr>';
+        if (lead.moving_from || lead.moving_to) html += '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:8px 0; color:#64748b;"><strong>Route:</strong></td><td><strong style="color:#0f172a;">' + (lead.moving_from || '') + '</strong> &rarr; <strong style="color:#0f172a;">' + (lead.moving_to || '') + '</strong></td></tr>';
         if (lead.move_size) html += '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:8px 0; color:#64748b;"><strong>Move Size:</strong></td><td><span class="hype-badge-size">' + lead.move_size + '</span></td></tr>';
         if (lead.move_date) html += '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:8px 0; color:#64748b;"><strong>Move Date:</strong></td><td>' + lead.move_date + '</td></tr>';
         if (lead.estimated_price) html += '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:8px 0; color:#64748b;"><strong>Estimated Quote:</strong></td><td><span class="hype-badge-cost">' + lead.estimated_price + '</span></td></tr>';
@@ -2139,7 +2244,7 @@ function hype_crm_render_spreadsheet() {
             })
         }).then(res => res.json()).then(d => {
             if (d.success) {
-                showHypeToast('✓ Staff notes saved successfully');
+                showHypeToast('Staff notes saved successfully');
                 hypeCloseModal();
             } else {
                 alert('Failed to save notes.');
@@ -2168,7 +2273,7 @@ function hype_crm_render_spreadsheet() {
             body: formData
         }).then(res => res.json()).then(d => {
             if (d.success) {
-                showHypeToast('✓ Lead added to spreadsheet!');
+                showHypeToast('Lead added to spreadsheet!');
                 setTimeout(() => { window.location.reload(); }, 600);
             } else {
                 alert(d.data?.message || 'Failed to add lead');
