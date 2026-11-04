@@ -380,23 +380,12 @@ function hype_crm_inject_frontend_script() {
     }
 
     /* Mobile View - Zero White Strips, Ultra-Compact & 100% Guaranteed Zero Sticky Overlap */
-    html body,
-    body.home,
-    body,
-    #layout,
-    .inner_layout {
-        background-color: #0b192c !important;
-    }
-
     @media (max-width: 768px) {
         html body,
         body.home,
-        body,
-        #layout,
-        .inner_layout {
+        body {
             padding-bottom: 0 !important;
             margin-bottom: 0 !important;
-            background-color: #0b192c !important;
         }
         
         /* ZERO MARGIN on all sections to completely prevent white strip gaps */
