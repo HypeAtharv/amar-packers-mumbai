@@ -1160,8 +1160,36 @@ function hype_crm_render_spreadsheet() {
     .hype-sheet-table td:last-child {
         border-right: none;
     }
-    .hype-sheet-table tr:hover td {
-        background: #f8fafc !important;
+    .hype-sheet-table tbody tr {
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+    }
+    .hype-sheet-table tbody tr:hover td {
+        background: #f1f5f9 !important;
+    }
+    .hype-cust-name-link {
+        font-weight: 700;
+        color: #0f172a;
+        font-size: 13.5px;
+        cursor: pointer;
+        display: inline-block;
+        transition: color 0.15s ease;
+    }
+    .hype-cust-name-link:hover {
+        color: #ee1d23;
+        text-decoration: underline;
+    }
+    .hype-id-tag {
+        cursor: pointer;
+        transition: all 0.15s ease;
+    }
+    .hype-id-tag:hover {
+        background: #e2e8f0;
+        color: #0f172a;
+        border-color: #cbd5e1;
+    }
+    .hype-act-btn, .hype-priority-tag, .hype-status-tag, .hype-tab, .hype-btn {
+        cursor: pointer !important;
     }
     .hype-sheet-table tr.selected td {
         background: #eff6ff !important;
@@ -1595,19 +1623,19 @@ function hype_crm_render_spreadsheet() {
                                 elseif (stripos($source_label, 'Popup') !== false || stripos($source_label, 'Modal') !== false) $source_icon = '💬';
                                 elseif (stripos($source_label, 'Manual') !== false) $source_icon = '✍️';
                             ?>
-                            <tr id="lead-row-<?php echo esc_attr($l->id); ?>">
-                                <td style="text-align:center;">
-                                    <input type="checkbox" class="hype-row-cb" value="<?php echo esc_attr($l->id); ?>">
+                            <tr id="lead-row-<?php echo esc_attr($l->id); ?>" class="hype-lead-row" onclick="hypeHandleRowClick(event, <?php echo intval($l->id); ?>)" title="Click anywhere on row to view full lead details">
+                                <td style="text-align:center;" onclick="event.stopPropagation();">
+                                    <input type="checkbox" class="hype-row-cb" value="<?php echo esc_attr($l->id); ?>" onclick="event.stopPropagation();">
                                 </td>
                                 <td>
-                                    <span class="hype-id-tag">#<?php echo esc_html($l->id); ?></span>
+                                    <span class="hype-id-tag" onclick="event.stopPropagation(); hypeOpenDetailModalById(<?php echo intval($l->id); ?>);" title="Click to view details">#<?php echo esc_html($l->id); ?></span>
                                 </td>
                                 <td>
                                     <div style="font-weight: 700; color: #0f172a; font-size: 12.5px;"><?php echo date('M d, Y', strtotime($l->created_at)); ?></div>
                                     <div style="font-size: 11px; color: #64748b; margin-top: 2px;"><?php echo date('h:i A', strtotime($l->created_at)); ?></div>
                                 </td>
-                                <td>
-                                    <select class="hype-priority-tag priority-<?php echo esc_attr($pr); ?>" onchange="hypeChangePriority(<?php echo esc_attr($l->id); ?>, this.value, this)">
+                                <td onclick="event.stopPropagation();">
+                                    <select class="hype-priority-tag priority-<?php echo esc_attr($pr); ?>" onchange="hypeChangePriority(<?php echo esc_attr($l->id); ?>, this.value, this)" onclick="event.stopPropagation();">
                                         <option value="urgent" <?php selected($pr, 'urgent'); ?>>🔥 Urgent</option>
                                         <option value="high" <?php selected($pr, 'high'); ?>>⚡ High</option>
                                         <option value="normal" <?php selected($pr, 'normal'); ?>>🔵 Normal</option>
@@ -1616,10 +1644,10 @@ function hype_crm_render_spreadsheet() {
                                 </td>
                                 <td>
                                     <div class="hype-customer-cell">
-                                        <div class="hype-avatar-circle"><?php echo esc_html($initials); ?></div>
+                                        <div class="hype-avatar-circle" onclick="event.stopPropagation(); hypeOpenDetailModalById(<?php echo intval($l->id); ?>);"><?php echo esc_html($initials); ?></div>
                                         <div>
-                                            <div class="hype-cust-name"><?php echo $display_name; ?></div>
-                                            <a href="tel:<?php echo esc_attr($l->phone); ?>" class="hype-cust-phone">
+                                            <div class="hype-cust-name-link" onclick="event.stopPropagation(); hypeOpenDetailModalById(<?php echo intval($l->id); ?>);" title="Click to view full lead details"><?php echo $display_name; ?></div>
+                                            <a href="tel:<?php echo esc_attr($l->phone); ?>" class="hype-cust-phone" onclick="event.stopPropagation();">
                                                 📞 <?php echo esc_html($l->phone); ?>
                                             </a>
                                             <?php if (!empty($l->email)) : ?>
@@ -1668,8 +1696,8 @@ function hype_crm_render_spreadsheet() {
                                         <span><?php echo $source_label; ?></span>
                                     </span>
                                 </td>
-                                <td>
-                                    <select class="hype-status-tag status-<?php echo esc_attr($l->status); ?>" onchange="hypeChangeStatus(<?php echo esc_attr($l->id); ?>, this.value, this)">
+                                <td onclick="event.stopPropagation();">
+                                    <select class="hype-status-tag status-<?php echo esc_attr($l->status); ?>" onchange="hypeChangeStatus(<?php echo esc_attr($l->id); ?>, this.value, this)" onclick="event.stopPropagation();">
                                         <option value="new" <?php selected($l->status, 'new'); ?>>● New</option>
                                         <option value="contacted" <?php selected($l->status, 'contacted'); ?>>● Contacted</option>
                                         <option value="quoted" <?php selected($l->status, 'quoted'); ?>>● Quoted</option>
@@ -1679,36 +1707,36 @@ function hype_crm_render_spreadsheet() {
                                         <option value="trash" <?php selected($l->status, 'trash'); ?>>● Trash</option>
                                     </select>
                                 </td>
-                                <td>
+                                <td onclick="event.stopPropagation();">
                                     <div class="hype-actions-cell">
                                         <?php if ($tab !== 'trash') : ?>
                                             <!-- 1-Click WhatsApp -->
-                                            <a href="https://wa.me/<?php echo esc_attr($wa_phone); ?>?text=<?php echo rawurlencode('Hello ' . $display_name . ', thank you for contacting Amar Packers & Movers. Regarding your inquiry:'); ?>" target="_blank" class="hype-act-btn act-wa" title="Open WhatsApp Chat">
+                                            <a href="https://wa.me/<?php echo esc_attr($wa_phone); ?>?text=<?php echo rawurlencode('Hello ' . $display_name . ', thank you for contacting Amar Packers & Movers. Regarding your inquiry:'); ?>" target="_blank" class="hype-act-btn act-wa" title="Open WhatsApp Chat" onclick="event.stopPropagation();">
                                                 💬
                                             </a>
                                             <!-- 1-Click Phone Call -->
-                                            <a href="tel:<?php echo esc_attr($l->phone); ?>" class="hype-act-btn act-call" title="Call Customer">
+                                            <a href="tel:<?php echo esc_attr($l->phone); ?>" class="hype-act-btn act-call" title="Call Customer" onclick="event.stopPropagation();">
                                                 📞
                                             </a>
                                             <!-- View Details / Notes -->
-                                            <button type="button" class="hype-act-btn act-view" onclick='hypeOpenDetailModal(<?php echo json_encode($l); ?>)' title="View Full Details & Notes">
+                                            <button type="button" class="hype-act-btn act-view" onclick="event.stopPropagation(); hypeOpenDetailModalById(<?php echo intval($l->id); ?>);" title="View Full Details & Notes">
                                                 👁️
                                             </button>
                                             <!-- Mark as Spam -->
-                                            <button type="button" class="hype-act-btn act-spam" onclick="hypeToggleSpam(<?php echo esc_attr($l->id); ?>, 1)" title="Mark as Spam">
+                                            <button type="button" class="hype-act-btn act-spam" onclick="event.stopPropagation(); hypeToggleSpam(<?php echo intval($l->id); ?>, 1);" title="Mark as Spam">
                                                 🛑
                                             </button>
                                             <!-- Move to Trash -->
-                                            <button type="button" class="hype-act-btn act-trash" onclick="hypeMoveToTrash(<?php echo esc_attr($l->id); ?>)" title="Move to Trash">
+                                            <button type="button" class="hype-act-btn act-trash" onclick="event.stopPropagation(); hypeMoveToTrash(<?php echo intval($l->id); ?>);" title="Move to Trash">
                                                 🗑️
                                             </button>
                                         <?php else : ?>
                                             <!-- Restore -->
-                                            <button type="button" class="hype-act-btn act-restore" onclick="hypeRestoreTrash(<?php echo esc_attr($l->id); ?>)" title="Restore Lead">
+                                            <button type="button" class="hype-act-btn act-restore" onclick="event.stopPropagation(); hypeRestoreTrash(<?php echo intval($l->id); ?>);" title="Restore Lead">
                                                 ♻️ Restore
                                             </button>
                                             <!-- Delete Permanent -->
-                                            <button type="button" class="hype-act-btn act-trash" onclick="hypeDeletePermanent(<?php echo esc_attr($l->id); ?>)" title="Delete Permanently">
+                                            <button type="button" class="hype-act-btn act-trash" onclick="event.stopPropagation(); hypeDeletePermanent(<?php echo intval($l->id); ?>);" title="Delete Permanently">
                                                 ❌
                                             </button>
                                         <?php endif; ?>
@@ -1825,8 +1853,43 @@ function hype_crm_render_spreadsheet() {
         </div>
     </div>
 
+    <?php
+    $leads_map = array();
+    foreach ($leads as $item) {
+        $leads_map[$item->id] = $item;
+    }
+    ?>
+    <script id="hypeLeadsStore" type="application/json">
+    <?php echo json_encode($leads_map, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>
+    </script>
+
     <script>
     const ajaxurl = '<?php echo esc_url(admin_url('admin-ajax.php')); ?>';
+    let hypeLeadsStore = {};
+    try {
+        const storeEl = document.getElementById('hypeLeadsStore');
+        if (storeEl && storeEl.textContent) {
+            hypeLeadsStore = JSON.parse(storeEl.textContent);
+        }
+    } catch(err) {
+        console.warn('Failed to parse leads store:', err);
+    }
+
+    function hypeHandleRowClick(e, leadId) {
+        if (!e) return;
+        const target = e.target;
+        if (target.closest('input') || target.closest('select') || target.closest('button') || target.closest('a')) {
+            return;
+        }
+        hypeOpenDetailModalById(leadId);
+    }
+
+    function hypeOpenDetailModalById(leadId) {
+        const lead = hypeLeadsStore[leadId];
+        if (lead) {
+            hypeOpenDetailModal(lead);
+        }
+    }
     const ajaxNonce = '<?php echo esc_js($ajax_nonce); ?>';
     let currentModalLeadId = 0;
 
@@ -2057,6 +2120,13 @@ function hype_crm_render_spreadsheet() {
     function hypeCloseModal() {
         document.getElementById('hypeLeadModal').style.display = 'none';
     }
+
+    window.addEventListener('click', function(e) {
+        const detailModal = document.getElementById('hypeLeadModal');
+        const manualModal = document.getElementById('hypeManualLeadModal');
+        if (e.target === detailModal) detailModal.style.display = 'none';
+        if (e.target === manualModal) manualModal.style.display = 'none';
+    });
 
     function hypeSaveNotes() {
         const notes = document.getElementById('hypeModalNotes').value;
