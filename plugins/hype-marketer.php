@@ -285,39 +285,39 @@ function hype_crm_inject_frontend_script() {
                 if (isSubmitting) return false;
 
                 const inputs = heroForm.querySelectorAll('input');
+                let nameInput = '';
                 let fromInput = '';
                 let toInput = '';
                 let phoneInput = '';
                 let dateInput = '';
 
-                inputs.forEach(function(inp, idx) {
+                inputs.forEach(function(inp) {
                     const ph = (inp.getAttribute('placeholder') || '').toLowerCase();
                     const type = (inp.getAttribute('type') || '').toLowerCase();
                     const val = inp.value.trim();
 
-                    if (ph.includes('from') || ph.includes('andheri')) {
+                    if (ph.includes('name') || ph.includes('rahul')) {
+                        nameInput = val;
+                    } else if (ph.includes('from') || ph.includes('andheri')) {
                         fromInput = val;
                     } else if (ph.includes('to') || ph.includes('powai')) {
                         toInput = val;
-                    } else if (ph.includes('mobile') || ph.includes('phone') || type === 'tel' || idx === 2) {
+                    } else if (ph.includes('mobile') || ph.includes('phone') || type === 'tel') {
                         phoneInput = val;
-                    } else if (type === 'date' || ph.includes('date') || idx === 3) {
+                    } else if (type === 'date' || ph.includes('date')) {
                         dateInput = val;
-                    } else {
-                        if (idx === 0 && !fromInput) fromInput = val;
-                        if (idx === 1 && !toInput) toInput = val;
                     }
                 });
 
-                if (!fromInput && inputs[0]) fromInput = inputs[0].value.trim();
-                if (!toInput && inputs[1]) toInput = inputs[1].value.trim();
-                if (!phoneInput && inputs[2]) phoneInput = inputs[2].value.trim();
-                if (!dateInput && inputs[3]) dateInput = inputs[3].value.trim();
+                if (!nameInput && inputs[0] && inputs.length >= 5) nameInput = inputs[0].value.trim();
+                if (!fromInput) fromInput = (inputs.length >= 5 ? inputs[1] : inputs[0]) ? (inputs.length >= 5 ? inputs[1] : inputs[0]).value.trim() : '';
+                if (!toInput) toInput = (inputs.length >= 5 ? inputs[2] : inputs[1]) ? (inputs.length >= 5 ? inputs[2] : inputs[1]).value.trim() : '';
+                if (!phoneInput) phoneInput = (inputs.length >= 5 ? inputs[3] : inputs[2]) ? (inputs.length >= 5 ? inputs[3] : inputs[2]).value.trim() : '';
+                if (!dateInput) dateInput = (inputs.length >= 5 ? inputs[4] : inputs[3]) ? (inputs.length >= 5 ? inputs[4] : inputs[3]).value.trim() : '';
 
                 const cleanPhone = phoneInput.replace(/\D/g, '');
                 if (!cleanPhone || cleanPhone.length < 10) {
                     alert('Please enter a valid 10-digit mobile number.');
-                    if (inputs[2]) inputs[2].focus();
                     return false;
                 }
 
@@ -332,9 +332,11 @@ function hype_crm_inject_frontend_script() {
                     submitBtn.innerHTML = '<span><i class="fas fa-spinner fa-spin"></i> Booking Survey...</span>';
                 }
 
+                const customerDisplayName = nameInput || (fromInput ? (fromInput + ' (Doorstep Survey)') : 'Website Visitor');
+
                 const formData = new FormData();
                 formData.append('action', 'amar_save_hero_lead');
-                formData.append('name', fromInput ? (fromInput + ' (Doorstep Survey)') : 'Website Visitor');
+                formData.append('name', customerDisplayName);
                 formData.append('phone', phoneInput);
                 formData.append('moving_from', fromInput);
                 formData.append('moving_to', toInput);
@@ -343,15 +345,16 @@ function hype_crm_inject_frontend_script() {
                 formData.append('estimated_price', estimatedPrice);
 
                 let waMsg = "Hello Amar Packers! I would like to book a free doorstep survey for moving in Mumbai.%0A%0A";
-                waMsg += "*Move Details:*%0A";
+                waMsg += "*Customer Details:*%0A";
+                if (nameInput) waMsg += "• *Name:* " + encodeURIComponent(nameInput) + "%0A";
+                waMsg += "• *Mobile:* " + encodeURIComponent(phoneInput) + "%0A";
                 waMsg += "• *Move Size:* " + encodeURIComponent(selectedSize) + "%0A";
                 if (fromInput) waMsg += "• *From:* " + encodeURIComponent(fromInput) + "%0A";
                 if (toInput) waMsg += "• *To:* " + encodeURIComponent(toInput) + "%0A";
                 if (dateInput) waMsg += "• *Move Date:* " + encodeURIComponent(dateInput) + "%0A";
-                waMsg += "• *Mobile:* " + encodeURIComponent(phoneInput) + "%0A";
                 waMsg += "• *Requirement:* Free Doorstep Survey & Custom Quote%0A%0A";
-                waMsg += "Please confirm survey coordinator slot.";
-
+                waMsg += "Please confirm survey coordinator slot.
+";
                 const waUrl = "https://wa.me/918286864002?text=" + waMsg;
                 const ajaxUrl = '<?php echo esc_url(admin_url('admin-ajax.php')); ?>';
 
