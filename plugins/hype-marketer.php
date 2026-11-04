@@ -594,11 +594,15 @@ function hype_crm_inject_frontend_script() {
             position: fixed !important;
             inset: 0 !important;
             z-index: 999999 !important;
-            display: flex !important;
+            display: none !important;
             align-items: center !important;
             justify-content: center !important;
             padding: 16px !important;
             box-sizing: border-box !important;
+        }
+
+        .amar-quote-modal-overlay.active {
+            display: flex !important;
         }
 
         .amar-quote-modal-backdrop {
@@ -981,7 +985,7 @@ function hype_crm_inject_frontend_script() {
         if (fromInp && options.from) fromInp.value = options.from;
         if (toInp && options.to) toInp.value = options.to;
 
-        modal.style.display = 'flex';
+        modal.classList.add('active');
         document.body.style.overflow = 'hidden';
 
         setTimeout(function() {
@@ -992,7 +996,7 @@ function hype_crm_inject_frontend_script() {
 
     window.amarCloseQuoteModal = function() {
         const modal = document.getElementById('amarQuoteModal');
-        if (modal) modal.style.display = 'none';
+        if (modal) modal.classList.remove('active');
         document.body.style.overflow = '';
     };
 
