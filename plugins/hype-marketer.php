@@ -87,6 +87,11 @@ add_action('admin_init', function() {
 add_action('admin_menu', 'hype_crm_register_admin_menu');
 
 function hype_crm_register_admin_menu() {
+    // Legacy redirect fallback
+    if (isset(['page']) && ['page'] === 'amar-sales-crm') {
+        wp_safe_redirect(admin_url('admin.php?page=hype-marketer'));
+        exit;
+    }
     global $wpdb;
     $table_name = $wpdb->prefix . 'amar_leads';
 
