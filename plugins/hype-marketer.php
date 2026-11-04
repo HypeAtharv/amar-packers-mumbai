@@ -1864,10 +1864,13 @@ function hype_crm_render_spreadsheet() {
     </script>
 
     <script>
-    const ajaxurl = '<?php echo esc_url(admin_url('admin-ajax.php')); ?>';
-    let hypeLeadsStore = {};
+    var hypeAjaxUrl = window.ajaxurl || '<?php echo esc_url(admin_url('admin-ajax.php')); ?>';
+    var ajaxNonce = '<?php echo esc_js($ajax_nonce); ?>';
+    var currentModalLeadId = 0;
+    var hypeLeadsStore = {};
+
     try {
-        const storeEl = document.getElementById('hypeLeadsStore');
+        var storeEl = document.getElementById('hypeLeadsStore');
         if (storeEl && storeEl.textContent) {
             hypeLeadsStore = JSON.parse(storeEl.textContent);
         }
@@ -1875,26 +1878,26 @@ function hype_crm_render_spreadsheet() {
         console.warn('Failed to parse leads store:', err);
     }
 
-    function hypeHandleRowClick(e, leadId) {
+    window.hypeHandleRowClick = function(e, leadId) {
         if (!e) return;
-        const target = e.target;
+        var target = e.target;
         if (target.closest('input') || target.closest('select') || target.closest('button') || target.closest('a')) {
             return;
         }
-        hypeOpenDetailModalById(leadId);
-    }
+        window.hypeOpenDetailModalById(leadId);
+    };
 
-    function hypeOpenDetailModalById(leadId) {
-        const lead = hypeLeadsStore[leadId];
+    window.hypeOpenDetailModalById = function(leadId) {
+        var lead = hypeLeadsStore[leadId];
         if (lead) {
-            hypeOpenDetailModal(lead);
+            window.hypeOpenDetailModal(lead);
+        } else {
+            console.warn('Lead #' + leadId + ' not found in store');
         }
-    }
-    const ajaxNonce = '<?php echo esc_js($ajax_nonce); ?>';
-    let currentModalLeadId = 0;
+    };
 
     // Toast Notification
-    function showHypeToast(msg) {
+    window.showHypeToast = function(msg) {
         const t = document.getElementById('hypeToast');
         const m = document.getElementById('hypeToastMsg');
         if (!t || !m) return;
@@ -1904,7 +1907,7 @@ function hype_crm_render_spreadsheet() {
     }
 
     // Client-side Instant Filter
-    function hypeClientSearch(term) {
+    window.hypeClientSearch = function(term) {
         term = term.toLowerCase().trim();
         const rows = document.querySelectorAll('#hypeMainTable tbody tr');
         rows.forEach(tr => {
@@ -1932,9 +1935,9 @@ function hype_crm_render_spreadsheet() {
     });
 
     // Update Status
-    function hypeChangeStatus(leadId, newStatus, selectEl) {
+    window.hypeChangeStatus = function(leadId, newStatus, selectEl) {
         selectEl.className = 'hype-status-tag status-' + newStatus;
-        fetch(ajaxurl, {
+        fetch(hypeAjaxUrl, {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: new URLSearchParams({
@@ -1949,9 +1952,9 @@ function hype_crm_render_spreadsheet() {
     }
 
     // Update Priority
-    function hypeChangePriority(leadId, newPriority, selectEl) {
+    window.hypeChangePriority = function(leadId, newPriority, selectEl) {
         selectEl.className = 'hype-priority-tag priority-' + newPriority;
-        fetch(ajaxurl, {
+        fetch(hypeAjaxUrl, {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: new URLSearchParams({
@@ -1966,9 +1969,9 @@ function hype_crm_render_spreadsheet() {
     }
 
     // Move to Trash
-    function hypeMoveToTrash(leadId) {
+    window.hypeMoveToTrash = function(leadId) {
         if (!confirm('Move Lead #' + leadId + ' to Trash?')) return;
-        fetch(ajaxurl, {
+        fetch(hypeAjaxUrl, {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: new URLSearchParams({
@@ -1986,8 +1989,8 @@ function hype_crm_render_spreadsheet() {
     }
 
     // Restore from Trash
-    function hypeRestoreTrash(leadId) {
-        fetch(ajaxurl, {
+    window.hypeRestoreTrash = function(leadId) {
+        fetch(hypeAjaxUrl, {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: new URLSearchParams({
@@ -2005,9 +2008,9 @@ function hype_crm_render_spreadsheet() {
     }
 
     // Delete Permanently
-    function hypeDeletePermanent(leadId) {
+    window.hypeDeletePermanent = function(leadId) {
         if (!confirm('Permanently delete Lead #' + leadId + '? This cannot be undone.')) return;
-        fetch(ajaxurl, {
+        fetch(hypeAjaxUrl, {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: new URLSearchParams({
@@ -2025,9 +2028,9 @@ function hype_crm_render_spreadsheet() {
     }
 
     // Mark Spam
-    function hypeToggleSpam(leadId, isSpam) {
+    window.hypeToggleSpam = function(leadId, isSpam) {
         if (!confirm('Mark Lead #' + leadId + ' as Spam?')) return;
-        fetch(ajaxurl, {
+        fetch(hypeAjaxUrl, {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: new URLSearchParams({
@@ -2046,7 +2049,7 @@ function hype_crm_render_spreadsheet() {
     }
 
     // Bulk Actions
-    function hypeExecuteBulkAction() {
+    window.hypeExecuteBulkAction = function() {
         const action = document.getElementById('hypeBulkActionSelect').value;
         if (!action) {
             alert('Please select an action.');
@@ -2067,7 +2070,7 @@ function hype_crm_render_spreadsheet() {
         formData.append('security', ajaxNonce);
         selected.forEach(id => formData.append('lead_ids[]', id));
 
-        fetch(ajaxurl, {
+        fetch(hypeAjaxUrl, {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: formData
@@ -2081,7 +2084,7 @@ function hype_crm_render_spreadsheet() {
     }
 
     // Details Modal
-    function hypeOpenDetailModal(lead) {
+    window.hypeOpenDetailModal = function(lead) {
         currentModalLeadId = lead.id;
         document.getElementById('hypeModalLeadTitle').innerText = 'Lead #' + lead.id + ' — ' + (lead.customer_name || 'Website Inquiry');
         document.getElementById('hypeModalSubtitle').innerText = 'Submitted on ' + lead.created_at;
@@ -2117,7 +2120,7 @@ function hype_crm_render_spreadsheet() {
         document.getElementById('hypeLeadModal').style.display = 'flex';
     }
 
-    function hypeCloseModal() {
+    window.hypeCloseModal = function() {
         document.getElementById('hypeLeadModal').style.display = 'none';
     }
 
@@ -2128,9 +2131,9 @@ function hype_crm_render_spreadsheet() {
         if (e.target === manualModal) manualModal.style.display = 'none';
     });
 
-    function hypeSaveNotes() {
+    window.hypeSaveNotes = function() {
         const notes = document.getElementById('hypeModalNotes').value;
-        fetch(ajaxurl, {
+        fetch(hypeAjaxUrl, {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: new URLSearchParams({
@@ -2150,22 +2153,22 @@ function hype_crm_render_spreadsheet() {
     }
 
     // Manual Add Modal
-    function hypeOpenManualModal() {
+    window.hypeOpenManualModal = function() {
         document.getElementById('hypeManualLeadModal').style.display = 'flex';
     }
 
-    function hypeCloseManualModal() {
+    window.hypeCloseManualModal = function() {
         document.getElementById('hypeManualLeadModal').style.display = 'none';
     }
 
-    function hypeSubmitManualLead(e) {
+    window.hypeSubmitManualLead = function(e) {
         e.preventDefault();
         const form = document.getElementById('hypeManualLeadForm');
         const formData = new FormData(form);
         formData.append('action', 'hype_add_manual_lead');
         formData.append('security', ajaxNonce);
 
-        fetch(ajaxurl, {
+        fetch(hypeAjaxUrl, {
             method: 'POST',
             body: formData
         }).then(res => res.json()).then(d => {
