@@ -379,35 +379,61 @@ function hype_crm_inject_frontend_script() {
         }
     }
 
-    /* Mobile View - Ultra-Compact, Zero Dead Space & Guaranteed Sticky Bar Clearance */
+    /* Mobile View - Zero White Strips, Ultra-Compact & 100% Guaranteed Zero Sticky Overlap */
+    html body,
+    body.home,
+    body,
+    #layout,
+    .inner_layout {
+        background-color: #0b192c !important;
+    }
+
     @media (max-width: 768px) {
         html body,
         body.home,
-        body {
+        body,
+        #layout,
+        .inner_layout {
             padding-bottom: 0 !important;
             margin-bottom: 0 !important;
+            background-color: #0b192c !important;
         }
         
-        /* Eliminate dead space on page sections */
+        /* ZERO MARGIN on all sections to completely prevent white strip gaps */
         .elementor-section,
         .elementor-top-section,
-        .e-con {
-            margin-top: 14px !important;
-            margin-bottom: 14px !important;
-            padding-top: 14px !important;
-            padding-bottom: 14px !important;
+        .e-con,
+        .elementor-section:first-child,
+        .elementor-section:first-of-type,
+        .elementor > .elementor-section:first-child,
+        .elementor-section:last-child,
+        .elementor-section:last-of-type,
+        .elementor > .elementor-section:last-child {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            border-top: none !important;
+            border-bottom: none !important;
+        }
+
+        #site_header,
+        .header_4,
+        .cz_header {
+            margin-bottom: 0 !important;
+            border-bottom: none !important;
         }
 
         #site_footer {
+            margin-top: 0 !important;
+            border-top: none !important;
             border-bottom: none !important;
             padding: 0 !important;
-            margin-bottom: 0 !important;
+            background: #0b1329 !important;
             overflow: visible !important;
         }
         
         .cz_middle_footer {
             padding-top: 20px !important;
-            padding-bottom: 12px !important;
+            padding-bottom: 10px !important;
         }
         
         .cz_middle_footer .col.s6,
@@ -419,7 +445,7 @@ function hype_crm_inject_frontend_script() {
             text-align: center !important;
             padding-left: 14px !important;
             padding-right: 14px !important;
-            margin-bottom: 16px !important;
+            margin-bottom: 14px !important;
             box-sizing: border-box !important;
         }
         
@@ -469,14 +495,14 @@ function hype_crm_inject_frontend_script() {
             font-size: 14px !important;
         }
         
-        /* Compact Bottom Bar with 95px Bottom Padding to Clear Sticky Bar Completely */
+        /* Compact Bottom Bar with 140px Bottom Padding to 100% Clear Mobile Sticky Bar */
         .footer_2 {
             background: #070d1e !important;
             border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-            padding-top: 12px !important;
+            padding-top: 14px !important;
             padding-left: 14px !important;
             padding-right: 14px !important;
-            padding-bottom: calc(95px + env(safe-area-inset-bottom, 0px)) !important;
+            padding-bottom: calc(140px + env(safe-area-inset-bottom, 0px)) !important;
             box-sizing: border-box !important;
         }
         
