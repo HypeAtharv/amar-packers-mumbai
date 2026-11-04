@@ -484,14 +484,26 @@ function hype_crm_inject_frontend_script() {
             font-size: 14px !important;
         }
         
-        /* Compact Bottom Bar with 140px Bottom Padding to 100% Clear Mobile Sticky Bar */
+
+        /* Smooth Slide-away for Sticky Bar when reaching Footer */
+        .amar-mobile-sticky-bar {
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            will-change: transform !important;
+        }
+
+        .amar-mobile-sticky-bar.hidden-at-footer {
+            transform: translateY(140%) !important;
+            pointer-events: none !important;
+        }
+
+        /* Compact Footer without excessive empty bottom gaps */
         .footer_2 {
             background: #070d1e !important;
             border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
             padding-top: 14px !important;
             padding-left: 14px !important;
             padding-right: 14px !important;
-            padding-bottom: calc(140px + env(safe-area-inset-bottom, 0px)) !important;
+            padding-bottom: 24px !important;
             box-sizing: border-box !important;
         }
         
@@ -1265,10 +1277,44 @@ function hype_crm_inject_frontend_script() {
         });
     }
 
+        
+    // --- Auto-Hide Sticky Bar at Footer (Zero Overlap Guaranteed) ---
+    function initStickyFooterObserver() {
+        const footer = document.getElementById('site_footer');
+        const stickyBar = document.querySelector('.amar-mobile-sticky-bar');
+        if (!footer || !stickyBar) return;
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        stickyBar.classList.add('hidden-at-footer');
+                    } else {
+                        stickyBar.classList.remove('hidden-at-footer');
+                    }
+                });
+            }, {
+                threshold: 0.05
+            });
+            observer.observe(footer);
+        } else {
+            // Fallback for older browsers: scroll check
+            window.addEventListener('scroll', function() {
+                const footerRect = footer.getBoundingClientRect();
+                if (footerRect.top < window.innerHeight) {
+                    stickyBar.classList.add('hidden-at-footer');
+                } else {
+                    stickyBar.classList.remove('hidden-at-footer');
+                }
+            }, { passive: true });
+        }
+    }
+
         function initAllAmarFrontend() {
             initHypeHeroCrm();
             initAmarModalForm();
             wireQuoteButtons();
+            initStickyFooterObserver();
         }
 
         if (document.readyState === 'loading') {
