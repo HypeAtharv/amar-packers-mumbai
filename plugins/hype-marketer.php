@@ -599,10 +599,10 @@ function hype_crm_inject_frontend_script() {
             display: none !important;
             visibility: hidden !important;
         }
-
+    }
         
-        /* ============================================================
-           AMAR PACKERS - MODERN REDESIGNED HERO SECTION (COHESIVE & CLEAN)
+    /* ============================================================
+       AMAR PACKERS - MODERN REDESIGNED HERO SECTION (COHESIVE & CLEAN)
            ============================================================ */
 
         .amar-hero-left-wrap {
@@ -1024,7 +1024,7 @@ function hype_crm_inject_frontend_script() {
             }
         }
 
-
+    @media (max-width: 768px) {
         /* 1. Remove top red phone text in mobile header */
         .cz_before_mobile_header,
         .elementor-1808,
