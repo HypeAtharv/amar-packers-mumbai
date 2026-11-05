@@ -1153,17 +1153,90 @@ function hype_crm_inject_frontend_script() {
             box-shadow: 0 8px 22px rgba(238, 29, 35, 0.5) !important;
         }
 
+        .amar-corridors-grid {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 18px !important;
+            margin-bottom: 24px !important;
+            align-items: stretch !important;
+        }
+        @media (max-width: 992px) { 
+            .amar-corridors-grid { 
+                grid-template-columns: repeat(2, 1fr) !important; 
+                gap: 14px !important;
+            } 
+        }
+        @media (max-width: 576px) { 
+            .amar-corridors-grid { 
+                grid-template-columns: 1fr !important; 
+                gap: 12px !important;
+            } 
+        }
+
+        .amar-corridor-card {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            height: 100% !important;
+            min-height: 100% !important;
+            box-sizing: border-box !important;
+            background: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 14px !important;
+            padding: 22px 18px !important;
+            box-shadow: 0 4px 14px rgba(11, 25, 44, 0.05) !important;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        .amar-corridor-card:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 12px 28px rgba(11, 25, 44, 0.1) !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        .amar-corridor-body {
+            display: flex !important;
+            flex-direction: column !important;
+            flex-grow: 1 !important;
+        }
+
+        .amar-corridor-route {
+            font-size: 15px !important;
+            font-weight: 800 !important;
+            line-height: 1.35 !important;
+            color: #0b192c !important;
+            margin: 0 0 8px 0 !important;
+            min-height: 42px !important;
+            display: flex !important;
+            align-items: flex-start !important;
+        }
+
+        .amar-corridor-price {
+            font-size: 13.5px !important;
+            font-weight: 700 !important;
+            color: #0b192c !important;
+            margin-bottom: 6px !important;
+        }
+
+        .amar-corridor-time {
+            font-size: 12px !important;
+            color: #64748b !important;
+            margin-bottom: 16px !important;
+        }
+
         .amar-corridor-btn {
+            margin-top: auto !important;
             display: block !important;
+            width: 100% !important;
             text-align: center !important;
             background: #0b192c !important;
             color: #ffffff !important;
-            padding: 8px 12px !important;
-            border-radius: 6px !important;
-            font-size: 12.5px !important;
+            padding: 10px 14px !important;
+            border-radius: 8px !important;
+            font-size: 13px !important;
             font-weight: 700 !important;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
             cursor: pointer !important;
+            box-sizing: border-box !important;
         }
 
         .amar-corridor-btn:hover {
